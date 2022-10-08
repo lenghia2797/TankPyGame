@@ -13,6 +13,6 @@ class MoleType(Enum):
     NORMAL_3 = 2
     BOMB = 3
     
-class Scene(Enum):
+class SceneKeys(Enum):
     MENU_SCENE = 0
     GAME_SCENE = 1

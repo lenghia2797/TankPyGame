@@ -1,0 +1,24 @@
+class Constants:
+    SCREEN_WIDTH = 960
+    SCREEN_HEIGHT = 540
+    
+    GREY = (150,150,150)
+    WHITE = (255,255,255)
+    BLACK = (0,0,0)
+    COLOR1 = (66, 135, 245)
+    COLOR2 = (235, 158, 52)
+    COLOR3 = (232, 58, 28)
+    
+    SCORE_LABEL_X = 100
+    SCORE_LABEL_Y = 150
+    PADDING_LABEL = 75
+    COLOR_TEXT = (204, 102, 255)
+
+    PLAY_BUTTON_WIDTH = 296
+    PLAY_BUTTON_HEIGHT = 116
+
+    TANK_WIDTH = 83
+    TANK_HEIGHT = 78
+    BULLET_WIDTH = 72
+    BULLET_HEIGHT = 72
+    
