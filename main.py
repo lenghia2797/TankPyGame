@@ -32,9 +32,15 @@ mixer.music.set_volume(0.1)
 mixer.music.load('sounds/bgm.mp3')
 
 background_image = pygame.image.load(r'./images/background.jpeg')
-
 play_button_image = pygame.image.load(r'./images/first_play_button.png')
 
+tank_blue_image = pygame.image.load(r'./images/tank-blue.png')
+tank_red_image = pygame.image.load(r'./images/tank-red.png')
+tank_yellow_image = pygame.image.load(r'./images/tank-yellow.png')
+circle_1_image = pygame.image.load(r'./images/circle_1.png')
+barrel_blue_image = pygame.image.load(r'./images/barrel-blue.png')
+barrel_red_image = pygame.image.load(r'./images/barrel-red.png')
+barrel_yellow_image = pygame.image.load(r'./images/barrel-yellow.png')
 
 SCORE_LABEL_X = 100
 SCORE_LABEL_Y = 150
@@ -43,6 +49,52 @@ COLOR_TEXT = (204, 102, 255)
 
 PLAY_BUTTON_WIDTH = 296
 PLAY_BUTTON_HEIGHT = 116
+
+TANK_WIDTH = 83
+TANK_HEIGHT = 78
+BULLET_WIDTH = 72
+BULLET_HEIGHT = 72
+
+class GameObject:
+    def __init__(self, x, y, width, height, image, depth):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.image = image
+        self.depth = depth
+        self.visible = True
+        self.active = True
+    
+    def update(self):
+        pass
+    
+    def render(self):
+        screen.blit(self.image, (self.x, self.y))
+        
+class Renderer:
+    def __init__(self):
+        self.objects: GameObject[10] = []
+    
+    def render(self):
+        if len(self.objects) > 0:
+            for object in self.objects:
+                if object.visible:
+                    object.render()
+            
+    def sortFunc(self, object):
+        return object.depth
+    
+    def add(self, object: GameObject):
+        self.objects.append(object)
+        self.objects.sort(key=self.sortFunc)
+        
+class Tank(GameObject):
+    def __init__(self, x, y, width, height, image, depth):
+        super().__init__(x, y, width, height, image, depth)
+    
+    def update(self):
+        super().update()
 
 class ScoreLabel:
     score = 0
@@ -58,7 +110,6 @@ class ScoreLabel:
         self.text = font.render(f'Score: {ScoreLabel.score}', True, COLOR_TEXT)
         
         screen.blit(self.text, (self.textRect.x + self.textRect.width/2 - 50, self.textRect.y))
-        
 
 class PlayButton:
     def __init__(self):
@@ -72,6 +123,11 @@ class PlayButton:
     def render(self):
         if (self.visible):
             screen.blit(play_button_image, (self.x, self.y))
+
+def isTouchOnRect(x, y, rectX, rectY, rectWidth, rectHeight):
+    if rectX < x and x < rectX + rectWidth and rectY < y and y < rectY + rectHeight:
+        return True
+    return False
 
 def main():
     currentScene = Scene.MENU_SCENE
@@ -91,6 +147,14 @@ def main():
     lastTimeShowPlay = pygame.time.get_ticks()
     
     mixer.music.play(-1)
+    
+    renderer = Renderer()
+    
+    background = GameObject(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, background_image, 0)
+    player = Tank(100, 100, TANK_WIDTH, TANK_HEIGHT, tank_yellow_image, 3)
+    
+    renderer.add(player)
+    renderer.add(background)
     while running:
         clock.tick(FPS)
         now = pygame.time.get_ticks()
@@ -100,7 +164,6 @@ def main():
             
         screen.fill(GREY)
         m_x, m_y = pygame.mouse.get_pos()
-        screen.blit(background_image, (0,0))
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -110,7 +173,16 @@ def main():
                     total_hit += 1
         if (currentScene == Scene.GAME_SCENE):                
             pass
+        elif (currentScene == Scene.MENU_SCENE):
+            if ((pygame.time.get_ticks() - lastTimeShowPlay > 700) and isTouchOnRect(m_x, m_y, playButton.x, playButton.y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT)):
+                gameOver = False
+                currentScene = Scene.GAME_SCENE
+                ScoreLabel.score = 0
+                playButton.visible = False
+             
+        renderer.render()   
         scoreLabel.update()
+        
         
         if (currentScene == Scene.MENU_SCENE):
             pass
