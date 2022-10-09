@@ -19,7 +19,7 @@ class SceneKeys(Enum):
     
 class TankState(Enum):
     NORMAL = 0
-    LEFT = 1
-    RIGHT = 2
+    ROTATE_LEFT = 1
+    ROTATE_RIGHT = 2
     UP = 3
     DOWN = 4

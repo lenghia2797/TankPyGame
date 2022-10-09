@@ -8,7 +8,7 @@ class Renderer:
     def render(self):
         if len(self.scene.objects) > 0:
             for object in self.scene.objects:
-                if object.visible:
+                if object.visible and object.active:
                     object.render()
             
     def sortFunc(self, object):

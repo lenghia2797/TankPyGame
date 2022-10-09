@@ -1,6 +1,10 @@
+from pygame import Rect
+
+
 class GameObject:
     def __init__(self, scene, x, y, width, height, image, depth):
         self.scene = scene
+        self.rect = Rect(x, y, width, height)
         self.x = x
         self.y = y
         self.width = width
@@ -18,7 +22,7 @@ class GameObject:
         pass
     
     def render(self):
-        self.scene.screen.blit(self.image, (self.x, self.y))
+        self.scene.screen.blit(self.image, (self.x, self.y, self.width, self.height))
     
     def setOnClick(self, onClickFunc):
         self.interactive = True

@@ -18,10 +18,10 @@ class GameScene(Scene):
         self.background = GameObject(self, 0, 0, Constants.SCREEN_WIDTH, 
                                      Constants.SCREEN_HEIGHT, self.loader.background_image, 0)
         self.player = Player(self, 100, 100, Constants.TANK_WIDTH, 
-                             Constants.TANK_HEIGHT, self.loader.tank_yellow_image, 3)
-        for i in range(20):
+                             Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
+        for i in range(100):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH, 
-                        Constants.BULLET_HEIGHT, self.loader.bullet_blue_image, 2)
+                        Constants.BULLET_HEIGHT, self.loader.bullet_red_image, 2)
             bullet.active = False
             self.add(bullet)
             self.bullets.append(bullet)
@@ -46,15 +46,19 @@ class GameScene(Scene):
     
     def shootBullet(self):
         bullet = self.getDeadBullet()
-        bullet.active = True
-        bullet.x = self.player.x
-        bullet.y = self.player.y
-        bullet.vx = -4
-        bullet.vy = -4
+        if bullet:
+            bullet.active = True
+            bullet.visible = True
+            bullet.collide = 0
+            bullet.x = self.player.x
+            bullet.y = self.player.y
+            bullet.vx = -4
+            bullet.vy = -4
         
     def getDeadBullet(self):
         for bullet in self.bullets:
             if not bullet.active:
                 return bullet
+        return None
     
     

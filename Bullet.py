@@ -8,6 +8,7 @@ class Bullet(GameObject):
         self.speed = 3
         self.vx = 0
         self.xy = 0
+        self.collide = 0
     
     def update(self):
         super().update()
@@ -17,8 +18,18 @@ class Bullet(GameObject):
         self.checkPosition()
     
     def checkPosition(self):
-        if self.x < 0 or self.y < 0:
+        if self.x < 0:
+            self.vx *= -1
+            self.collide += 1
+        if self.y < 0:
+            self.vy *= -1
+            self.collide += 1
+        if self.x + Constants.BULLET_HEIGHT > Constants.SCREEN_WIDTH:
+            self.vx *= -1
+            self.collide += 1
+        if self.y + Constants.BULLET_HEIGHT > Constants.SCREEN_HEIGHT:
+            self.vy *= -1
+            self.collide += 1
+            
+        if self.collide >= 2:
             self.active = False
-        if self.x > Constants.SCREEN_WIDTH or self.y > Constants.SCREEN_HEIGHT:
-            self.active = False
-        
