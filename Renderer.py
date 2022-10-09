@@ -14,7 +14,7 @@ class Renderer:
     def sortFunc(self, object):
         return object.depth
     
-    def sort(self, object: GameObject):
+    def sort(self):
         self.scene.objects.sort(key=self.sortFunc)
         
     def destroy(self, object: GameObject):

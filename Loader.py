@@ -13,3 +13,6 @@ class Loader:
         self.barrel_blue_image = pygame.image.load(r'./assets/images/barrel-blue.png')
         self.barrel_red_image = pygame.image.load(r'./assets/images/barrel-red.png')
         self.barrel_yellow_image = pygame.image.load(r'./assets/images/barrel-yellow.png')
+        self.bullet_blue_image = pygame.image.load(r'./assets/images/bullet-blue.png')
+        self.bullet_red_image = pygame.image.load(r'./assets/images/bullet-red.png')
+        self.bullet_yellow_image = pygame.image.load(r'./assets/images/bullet-yellow.png')

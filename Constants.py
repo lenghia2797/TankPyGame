@@ -19,6 +19,6 @@ class Constants:
 
     TANK_WIDTH = 83
     TANK_HEIGHT = 78
-    BULLET_WIDTH = 72
-    BULLET_HEIGHT = 72
+    BULLET_WIDTH = 20
+    BULLET_HEIGHT = 34
     

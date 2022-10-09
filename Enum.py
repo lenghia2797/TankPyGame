@@ -16,3 +16,10 @@ class MoleType(Enum):
 class SceneKeys(Enum):
     MENU_SCENE = 0
     GAME_SCENE = 1
+    
+class TankState(Enum):
+    NORMAL = 0
+    LEFT = 1
+    RIGHT = 2
+    UP = 3
+    DOWN = 4

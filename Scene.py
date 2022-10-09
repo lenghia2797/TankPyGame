@@ -16,10 +16,7 @@ class Scene:
         
     def add(self, object: GameObject):
         self.objects.append(object)
-        self.renderer.sort(object)
-        
-    def create(self):
-        pass
+        self.renderer.sort()
     
     def update(self):
         m_x, m_y = pygame.mouse.get_pos()
@@ -28,8 +25,34 @@ class Scene:
                 return False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.inputHandler.process(m_x, m_y)
-                
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    self.inputHandler.process(m_x, m_y, 'down_a')
+                if event.key == pygame.K_d:
+                    self.inputHandler.process(m_x, m_y, 'down_d')
+                if event.key == pygame.K_w:
+                    self.inputHandler.process(m_x, m_y, 'down_w')
+                if event.key == pygame.K_s:
+                    self.inputHandler.process(m_x, m_y, 'down_s')
+                if event.key == pygame.K_x:
+                    self.inputHandler.process(m_x, m_y, 'down_x')
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_a:
+                    self.inputHandler.process(m_x, m_y, 'up_a')
+                if event.key == pygame.K_d:
+                    self.inputHandler.process(m_x, m_y, 'up_d')
+                if event.key == pygame.K_w:
+                    self.inputHandler.process(m_x, m_y, 'up_w')
+                if event.key == pygame.K_s:
+                    self.inputHandler.process(m_x, m_y, 'up_s')
+                if event.key == pygame.K_x:
+                    self.inputHandler.process(m_x, m_y, 'up_x')
+        self.updateObjects()
         self.renderer.render()
         
         return True
         
+    def updateObjects(self):
+        for object in self.objects:
+            if object.active:
+                object.update()

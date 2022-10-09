@@ -10,8 +10,10 @@ class GameObject:
         self.visible = True
         self.active = True
         self.interactive = False
-        self.onClickFunc : Any
-    
+        self.onClickFunc: Any
+        self.haveKey = False
+        self.keys = []
+        
     def update(self):
         pass
     
@@ -21,3 +23,7 @@ class GameObject:
     def setOnClick(self, onClickFunc):
         self.interactive = True
         self.onClickFunc = onClickFunc
+        
+    def setKey(self, key, keyFunc):
+        self.haveKey = True
+        self.keys.append([key, keyFunc])

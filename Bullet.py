@@ -1,0 +1,24 @@
+from Constants import Constants
+from Enum import TankState
+from GameObject import GameObject
+
+class Bullet(GameObject):
+    def __init__(self, scene, x, y, width, height, image, depth):
+        super().__init__(scene, x, y, width, height, image, depth)
+        self.speed = 3
+        self.vx = 0
+        self.xy = 0
+    
+    def update(self):
+        super().update()
+        if self.active:
+            self.x += self.vx
+            self.y += self.vy
+        self.checkPosition()
+    
+    def checkPosition(self):
+        if self.x < 0 or self.y < 0:
+            self.active = False
+        if self.x > Constants.SCREEN_WIDTH or self.y > Constants.SCREEN_HEIGHT:
+            self.active = False
+        
