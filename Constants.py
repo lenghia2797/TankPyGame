@@ -1,18 +1,18 @@
 class Constants:
     SCREEN_WIDTH = 960
     SCREEN_HEIGHT = 540
-    
-    GREY = (150,150,150)
-    WHITE = (255,255,255)
-    BLACK = (0,0,0)
+
+    GREY = (150, 150, 150)
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
     COLOR1 = (66, 135, 245)
     COLOR2 = (235, 158, 52)
     COLOR3 = (232, 58, 28)
-    
-    SCORE_LABEL_X = 100
-    SCORE_LABEL_Y = 150
+
+    SCORE_LABEL_X = 60
+    SCORE_LABEL_Y = 30
     PADDING_LABEL = 75
-    COLOR_TEXT = (204, 102, 255)
+    COLOR_TEXT = (0, 0, 0)
 
     PLAY_BUTTON_WIDTH = 296
     PLAY_BUTTON_HEIGHT = 116
@@ -21,10 +21,9 @@ class Constants:
     TANK_HEIGHT = 89
     BULLET_WIDTH = 20
     BULLET_HEIGHT = 20
-    
+
     TRIANGLE_WIDTH = 13
     TRIANGLE_HEIGHT = 10
-    
+
     WALL_WIDTH = 80
     WALL_HEIGHT = 80
-    

@@ -8,6 +8,7 @@ from Enum import TankType
 from GameObject import GameObject
 from Player import Player
 from Scene import Scene
+from ScoreLabel import ScoreLabel
 from Tank import Tank
 from Wall import Wall
 
@@ -103,7 +104,9 @@ class GameScene(Scene):
                     bullet.active = False
                     bullet.visible = False
                     bullet.x = -100
-                    print(123)
+                    if tank.type == TankType.ENEMY_1:
+                        print(123)
+                        ScoreLabel.score += 1
 
     def shootBullet(self):
         bullet = self.getRedDeadBullet()
