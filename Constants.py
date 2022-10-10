@@ -18,7 +18,7 @@ class Constants:
     PLAY_BUTTON_HEIGHT = 116
 
     TANK_WIDTH = 83
-    TANK_HEIGHT = 72
+    TANK_HEIGHT = 89
     BULLET_WIDTH = 20
     BULLET_HEIGHT = 20
     

@@ -1,3 +1,4 @@
+import math
 import random
 import pygame
 from Bullet import Bullet
@@ -23,6 +24,7 @@ class GameScene(Scene):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH, 
                         Constants.BULLET_HEIGHT, self.loader.bullet_red_image, 2)
             bullet.active = False
+            bullet.tank = self.player
             self.add(bullet)
             self.bullets.append(bullet)
         self.player.setKey('down_a', self.player.onPressA)
@@ -50,10 +52,10 @@ class GameScene(Scene):
             bullet.active = True
             bullet.visible = True
             bullet.collide = 0
-            bullet.x = self.player.x
-            bullet.y = self.player.y
-            bullet.vx = -4
-            bullet.vy = -4
+            bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
+            bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
+            bullet.vx = bullet.speed * math.sin((bullet.tank.angle - 180) * math.pi / 180)
+            bullet.vy = bullet.speed * math.cos((bullet.tank.angle - 180) * math.pi / 180)
         
     def getDeadBullet(self):
         for bullet in self.bullets:

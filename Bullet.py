@@ -1,6 +1,7 @@
 from Constants import Constants
 from Enum import TankState
 from GameObject import GameObject
+from Tank import Tank
 
 class Bullet(GameObject):
     def __init__(self, scene, x, y, width, height, image, depth):
@@ -9,6 +10,8 @@ class Bullet(GameObject):
         self.vx = 0
         self.xy = 0
         self.collide = 0
+        self.tank: Tank
+        self.speed = 20
     
     def update(self):
         super().update()

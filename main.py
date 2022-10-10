@@ -22,10 +22,10 @@ pygame.display.set_caption('Hit Mole')
 font = pygame.font.Font('freesansbold.ttf', 30)
 
 
-mixer.init()
-mixer.music.set_volume(0.1)
+# mixer.init()
+# mixer.music.set_volume(0.1)
 
-mixer.music.load('assets/sounds/bgm.mp3')
+# mixer.music.load('assets/sounds/bgm.mp3')
 class ScoreLabel:
     score = 0
     def __init__(self):
@@ -78,7 +78,7 @@ def main():
     lastTimeExplode = pygame.time.get_ticks()
     lastTimeShowPlay = pygame.time.get_ticks()
     
-    mixer.music.play(-1)
+    # mixer.music.play(-1)
     
     gameScene = GameScene(screen)
 
