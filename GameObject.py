@@ -1,4 +1,5 @@
 from pygame import Rect
+import pygame
 
 
 class GameObject:
@@ -17,17 +18,25 @@ class GameObject:
         self.onClickFunc: Any
         self.haveKey = False
         self.keys = []
-        
+
     def update(self):
         pass
-    
+
     def render(self):
-        self.scene.screen.blit(self.image, (self.x, self.y, self.width, self.height))
-    
+        self.scene.screen.blit(
+            self.image, (self.x, self.y, self.width, self.height))
+
     def setOnClick(self, onClickFunc):
         self.interactive = True
         self.onClickFunc = onClickFunc
-        
+
     def setKey(self, key, keyFunc):
         self.haveKey = True
         self.keys.append([key, keyFunc])
+
+    def rot_center(self, image, angle):
+
+        loc = image.get_rect().center  # rot_image is not defined
+        rot_sprite = pygame.transform.rotate(image, angle)
+        rot_sprite.get_rect().center = loc
+        return rot_sprite

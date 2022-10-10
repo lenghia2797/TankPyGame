@@ -10,7 +10,7 @@ from Loader import Loader
 from Tank import Tank
 
 
-class Player(Tank):
+class Player2(Tank):
     def __init__(self, scene, x, y, width, height, image, depth):
         super().__init__(scene, x, y, width, height, image, depth)
 
@@ -90,3 +90,10 @@ class Player(Tank):
 
     def autoMove(self):
         pass
+
+    def rot_center(self, image, angle):
+
+        loc = image.get_rect().center  # rot_image is not defined
+        rot_sprite = pygame.transform.rotate(image, angle)
+        rot_sprite.get_rect().center = loc
+        return rot_sprite
