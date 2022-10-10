@@ -65,6 +65,8 @@ class GameScene(Scene):
         self.add(self.wall)
         self.add(self.enemy)
 
+        self.scoreLabel = ScoreLabel(self)
+
     def update(self):
         running = super().update()
         self.checkCollisionBulletWall(self.redBullets)
@@ -72,6 +74,8 @@ class GameScene(Scene):
         self.checkCollisionBulletTank(self.redBullets, self.enemy)
         self.checkCollisionBulletTank(self.blueBullets, self.player)
         self.checkCollisionBulletTank(self.blueBullets, self.player2)
+
+        self.scoreLabel.update()
 
         return running
 

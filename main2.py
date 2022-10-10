@@ -14,11 +14,11 @@ from spritesheet import SpriteSheet
 pygame.init()
 SCREEN_WIDTH = 960
 SCREEN_HEIGHT = 540
-screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Hit Mole')
-GREY = (150,150,150)
-WHITE = (255,255,255)
-BLACK = (0,0,0)
+GREY = (150, 150, 150)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 COLOR1 = (66, 135, 245)
 COLOR2 = (235, 158, 52)
 COLOR3 = (232, 58, 28)
@@ -103,29 +103,50 @@ SCORE_LABEL_Y = 150
 PADDING_LABEL = 75
 COLOR_TEXT = (204, 102, 255)
 
-time_over_image = pygame.transform.scale(time_over_image, (TIME_OVER_WIDTH, TIME_OVER_HEIGHT))
+time_over_image = pygame.transform.scale(
+    time_over_image, (TIME_OVER_WIDTH, TIME_OVER_HEIGHT))
 
-wick_0_image = wick_sprite_sheet.get_image(0, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
-wick_1_image = wick_sprite_sheet.get_image(1, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
-wick_2_image = wick_sprite_sheet.get_image(2, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
-wick_3_image = wick_sprite_sheet.get_image(3, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
-wick_4_image = wick_sprite_sheet.get_image(4, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
+wick_0_image = wick_sprite_sheet.get_image(
+    0, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
+wick_1_image = wick_sprite_sheet.get_image(
+    1, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
+wick_2_image = wick_sprite_sheet.get_image(
+    2, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
+wick_3_image = wick_sprite_sheet.get_image(
+    3, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
+wick_4_image = wick_sprite_sheet.get_image(
+    4, WICK_FRAME_WIDTH, WICK_FRAME_HEIGHT, 1, BLACK)
 
-hammer_0_image = hammer_sprite_sheet.get_image(0, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
-hammer_1_image = hammer_sprite_sheet.get_image(1, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
-hammer_2_image = hammer_sprite_sheet.get_image(2, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
-hammer_3_image = hammer_sprite_sheet.get_image(3, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
-hammer_4_image = hammer_sprite_sheet.get_image(4, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
-hammer_5_image = hammer_sprite_sheet.get_image(5, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
+hammer_0_image = hammer_sprite_sheet.get_image(
+    0, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
+hammer_1_image = hammer_sprite_sheet.get_image(
+    1, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
+hammer_2_image = hammer_sprite_sheet.get_image(
+    2, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
+hammer_3_image = hammer_sprite_sheet.get_image(
+    3, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
+hammer_4_image = hammer_sprite_sheet.get_image(
+    4, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
+hammer_5_image = hammer_sprite_sheet.get_image(
+    5, HAMMER_FRAME_WIDTH, HAMMER_FRAME_HEIGHT, 1, BLACK)
 
-explode_0_image = explode_sprite_sheet.get_image(0, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_1_image = explode_sprite_sheet.get_image(1, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_2_image = explode_sprite_sheet.get_image(2, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_3_image = explode_sprite_sheet.get_image(3, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_4_image = explode_sprite_sheet.get_image(4, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_5_image = explode_sprite_sheet.get_image(5, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_6_image = explode_sprite_sheet.get_image(6, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
-explode_7_image = explode_sprite_sheet.get_image(7, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_0_image = explode_sprite_sheet.get_image(
+    0, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_1_image = explode_sprite_sheet.get_image(
+    1, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_2_image = explode_sprite_sheet.get_image(
+    2, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_3_image = explode_sprite_sheet.get_image(
+    3, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_4_image = explode_sprite_sheet.get_image(
+    4, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_5_image = explode_sprite_sheet.get_image(
+    5, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_6_image = explode_sprite_sheet.get_image(
+    6, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+explode_7_image = explode_sprite_sheet.get_image(
+    7, EXPLODE_FRAME_WIDTH, EXPLODE_FRAME_HEIGHT, 1, BLACK)
+
 
 class Ground:
     def __init__(self, idx, idy):
@@ -134,84 +155,101 @@ class Ground:
         self.x = GROUND_TOP_LEFT_X + PADDING_GROUND_WIDTH*idx
         self.y = GROUND_TOP_LEFT_Y + PADDING_GROUND_HEIGHT*idy
         self.haveMole = False
-        
+
     def update(self):
         self.render()
-    
+
     def render(self):
         screen.blit(ground_image, (self.x, self.y))
+
+
 class Grid:
     def __init__(self, row, col):
         self.row = row
         self.col = col
         self.grounds = []
         self.createGrounds()
-        
+
     def createGrounds(self):
         for row in range(self.row):
             for col in range(self.col):
                 ground = Ground(row, col)
                 self.grounds.append(ground)
-        
+
     def update(self):
         self.render()
-    
+
     def render(self):
         for ground in self.grounds:
             ground.render()
-            
+
     def getGroundLocation(self, row, col):
         for ground in self.grounds:
             if ground.idx == row and ground.idy == col:
                 return ground.x, ground.y
-            
+
+
 class Label:
     pass
 
+
 class ScoreLabel:
     score = 0
+
     def __init__(self):
         self.text = font.render(f'Score: {ScoreLabel.score}', True, COLOR_TEXT)
         self.textRect = self.text.get_rect()
         self.textRect.center = (SCORE_LABEL_X, SCORE_LABEL_Y)
-        
+
     def update(self):
         self.render()
-    
+
     def render(self):
         self.text = font.render(f'Score: {ScoreLabel.score}', True, COLOR_TEXT)
-        
-        screen.blit(self.text, (self.textRect.x + self.textRect.width/2 - 50, self.textRect.y))
-        
+
+        screen.blit(self.text, (self.textRect.x +
+                    self.textRect.width/2 - 50, self.textRect.y))
+
+
 class EscapeLabel:
     escape = 0
+
     def __init__(self):
-        self.text = font.render(f'Escaped: {EscapeLabel.escape}', True, COLOR_TEXT)
+        self.text = font.render(
+            f'Escaped: {EscapeLabel.escape}', True, COLOR_TEXT)
         self.textRect = self.text.get_rect()
         self.textRect.center = (SCORE_LABEL_X, SCORE_LABEL_Y + PADDING_LABEL*2)
-        
+
     def update(self):
         self.render()
-    
+
     def render(self):
-        self.text = font.render(f'Escaped: {EscapeLabel.escape}', True, COLOR_TEXT)
-        
-        screen.blit(self.text, (self.textRect.x + self.textRect.width/2 - 50, self.textRect.y))
-        
+        self.text = font.render(
+            f'Escaped: {EscapeLabel.escape}', True, COLOR_TEXT)
+
+        screen.blit(self.text, (self.textRect.x +
+                    self.textRect.width/2 - 50, self.textRect.y))
+
+
 class AccuracyLabel:
     accuracy = 0
+
     def __init__(self):
-        self.text = font.render(f'Accuracy: {AccuracyLabel.accuracy}', True, COLOR_TEXT)
+        self.text = font.render(
+            f'Accuracy: {AccuracyLabel.accuracy}', True, COLOR_TEXT)
         self.textRect = self.text.get_rect()
         self.textRect.center = (SCORE_LABEL_X, SCORE_LABEL_Y + PADDING_LABEL*3)
-        
+
     def update(self):
         self.render()
-    
+
     def render(self):
-        self.text = font.render(f'Accuracy: {AccuracyLabel.accuracy} %', True, COLOR_TEXT)
-        
-        screen.blit(self.text, (self.textRect.x + self.textRect.width/2 - 50, self.textRect.y))
+        self.text = font.render(
+            f'Accuracy: {AccuracyLabel.accuracy} %', True, COLOR_TEXT)
+
+        screen.blit(self.text, (self.textRect.x +
+                    self.textRect.width/2 - 50, self.textRect.y))
+
 
 class TimeLabel:
     def __init__(self, maxTime):
@@ -222,11 +260,11 @@ class TimeLabel:
         self.textRect = self.text.get_rect()
         self.textRect.center = (SCORE_LABEL_X, SCORE_LABEL_Y + PADDING_LABEL)
         self.isRun = False
-        
+
     def update(self):
         self.decreaseTime()
         self.render()
-        
+
     def decreaseTime(self):
         if (self.isRun):
             now = pygame.time.get_ticks()
@@ -236,20 +274,22 @@ class TimeLabel:
 
     def render(self):
         self.text = font.render(f'Time: {self.timeLeft}', True, COLOR_TEXT)
-        
-        screen.blit(self.text, (self.textRect.x + self.textRect.width/2 - 50, self.textRect.y))
-        
+
+        screen.blit(self.text, (self.textRect.x +
+                    self.textRect.width/2 - 50, self.textRect.y))
+
     def resetTime(self):
         self.timeLeft = self.maxTime
         self.lastSecond = pygame.time.get_ticks()
         self.run()
-        
+
     def run(self):
         self.lastSecond = pygame.time.get_ticks()
         self.isRun = True
-        
+
     def stop(self):
         self.isRun = False
+
 
 class Animation:
     def __init__(self, frames, duration, repeat):
@@ -275,7 +315,7 @@ class Animation:
                 self.isRun = False
                 self.frameIndex = 0
                 self.currentFrame = self.frames[0]
-    
+
     def updateNextFrame(self):
         now = pygame.time.get_ticks()
 
@@ -287,12 +327,12 @@ class Animation:
             self.frameIndex = 0
             self.currentFrame = self.frames[0]
             self.lastFrameRun = now
-            
+
     def run(self):
         self.isRun = True
-        self.lastRun =  pygame.time.get_ticks()
+        self.lastRun = pygame.time.get_ticks()
         self.lastFrameRun = pygame.time.get_ticks()
-    
+
     def stop(self):
         self.isRun = False
 
@@ -303,22 +343,24 @@ class Hammer:
         self.idy = idy
         self.grid: Grid = grid
         self.hammer_animation = Animation([hammer_0_image, hammer_1_image, hammer_2_image, hammer_3_image, hammer_4_image],
-                                     200, 0)
-    
+                                          200, 0)
+
     def update(self):
         self.hammer_animation.update()
         self.render()
-    
+
     def render(self):
         if self.hammer_animation.isRun:
             groundLocation = self.grid.getGroundLocation(self.idx, self.idy)
-            screen.blit(self.hammer_animation.currentFrame, (groundLocation[0], groundLocation[1] - 180))
-           
+            screen.blit(self.hammer_animation.currentFrame,
+                        (groundLocation[0], groundLocation[1] - 180))
+
     def hit(self, idx, idy):
         self.idx = idx
         self.idy = idy
         self.hammer_animation.run()
-    
+
+
 class Mole:
     def __init__(self, grid, x, y, type):
         pygame.sprite.Sprite.__init__(self)
@@ -337,7 +379,7 @@ class Mole:
         self.height = MOLE_HEIGHT
         self.wick_animation = Animation([wick_0_image, wick_1_image, wick_2_image, wick_3_image, wick_4_image],
                                         500, 0)
-        self.explode_animation = Animation([explode_0_image, explode_1_image, explode_2_image, explode_3_image, 
+        self.explode_animation = Animation([explode_0_image, explode_1_image, explode_2_image, explode_3_image,
                                             explode_4_image, explode_5_image, explode_6_image, explode_7_image],
                                            500, 0)
         if (type == MoleType.NORMAL):
@@ -366,15 +408,15 @@ class Mole:
         self.resetTeleportTime()
         self.onHit = False
         self.lastHit = pygame.time.get_ticks()
-        self.respawn()  
-        
+        self.respawn()
+
     def resetTeleportTime(self):
         self.teleportTime = 100 + 1500 * random.random()
         if (self.type == MoleType.NORMAL_3):
             self.teleportTime = 1000 + 1000 * random.random()
         if (self.type == MoleType.BOMB):
             self.teleportTime = 2000 + 2000 * random.random()
-    
+
     def update(self, deltaTime):
         now = pygame.time.get_ticks()
         if now - self.lastHit > 100 and self.onHit:
@@ -383,47 +425,52 @@ class Mole:
         self.updateFollowStatus(deltaTime)
         self.explode_animation.update()
         self.render()
-    
+
     def render(self):
         if self.visible:
             if (self.type == MoleType.BOMB):
-                screen.blit(self.image, (self.x + 15, self.y), (0, 0, self.width, 1 - (self.y - self.ground.y - self.height*0.5)))
+                screen.blit(self.image, (self.x + 15, self.y), (0, 0,
+                            self.width, 1 - (self.y - self.ground.y - self.height*0.5)))
             else:
-                screen.blit(self.image, (self.x, self.y), (0, 0, self.width, 1 - (self.y - self.ground.y - self.height*0.5)))
+                screen.blit(self.image, (self.x, self.y), (0, 0, self.width,
+                            1 - (self.y - self.ground.y - self.height*0.5)))
             if (self.isDead and self.y < self.ground.y):
                 screen.blit(self.eye, (self.x + 17, self.y + 24))
             if (self.isHaveHat and self.y < self.ground.y):
                 screen.blit(self.hard_hat, (self.x + 8, self.y - 15))
             if (self.wick_animation.isRun and self.y < self.ground.y):
-                screen.blit(self.wick_animation.currentFrame , (self.x, self.y - WICK_FRAME_WIDTH/2))
-            
+                screen.blit(self.wick_animation.currentFrame,
+                            (self.x, self.y - WICK_FRAME_WIDTH/2))
+
     def render_explode_animation(self):
         if (self.explode_animation.isRun):
-            screen.blit(self.explode_animation.currentFrame, (self.x - 29, self.y - 44))
-            
+            screen.blit(self.explode_animation.currentFrame,
+                        (self.x - 29, self.y - 44))
+
     def teleport(self):
-        groundNoMoles = list(filter(lambda x: not x.haveMole, self.grid.grounds))
+        groundNoMoles = list(
+            filter(lambda x: not x.haveMole, self.grid.grounds))
         if (len(groundNoMoles) > 0):
-            randNumber =  math.floor(random.random() * len(groundNoMoles))
-            self.ground = groundNoMoles[randNumber] 
+            randNumber = math.floor(random.random() * len(groundNoMoles))
+            self.ground = groundNoMoles[randNumber]
             self.ground.haveMole = True
             self.rawX = self.ground.x + GROUND_WIDTH/2 - self.width/2
             self.x = self.rawX
             self.y = self.ground.y
             self.lastTeleport = pygame.time.get_ticks()
             self.resetTeleportTime()
-        
+
     def showUp(self, deltaTime):
         self.y -= 10 / 33 * deltaTime
         if (self.y < self.ground.y - self.height*0.7):
             self.changeModeToWaiting()
-    
+
     def exit(self, deltaTime):
         self.y += 10 / 33 * deltaTime
         if (self.y > self.ground.y + 20):
             self.ground.haveMole = False
             self.respawn()
-    
+
     def respawn(self):
         self.changeModeToHidden()
         self.isDead = False
@@ -437,7 +484,7 @@ class Mole:
             self.isHard = False
             self.lives = 1
         self.isHaveHat = self.isHard
-        
+
     def destroy(self):
         self.changeModeToNotStart()
         self.ground.haveMole = False
@@ -462,7 +509,7 @@ class Mole:
                     EscapeLabel.escape += 1
         elif (self.status == MoleStatus.EXIT):
             self.exit(deltaTime)
-            
+
     def shake(self, deltaTime):
         if (self.isShake):
             if (self.shakeLeft):
@@ -476,11 +523,11 @@ class Mole:
             now = pygame.time.get_ticks()
             if (now - self.lastShake > self.shakeTime):
                 self.isShake = False
-            
+
     def getHit(self):
         mixer.Sound.play(swing_sound)
         self.lives -= 1
-        
+
         if (self.isHaveHat):
             mixer.Sound.play(wood_hit_sound)
             self.isShake = True
@@ -493,7 +540,7 @@ class Mole:
                 ScoreLabel.score += 3
             else:
                 ScoreLabel.score += 1
-        
+
     def dead(self):
         self.isDead = True
         if (random.random() < 0.33):
@@ -503,34 +550,34 @@ class Mole:
         else:
             mixer.Sound.play(squeak_3_sound)
         self.changeModeToExit()
-                
+
     def changeModeToShowUp(self):
         mixer.Sound.play(pop_sound)
         self.active = True
         self.visible = True
         self.status = MoleStatus.SHOW_UP
-        
+
     def changeModeToWaiting(self):
         self.active = True
         self.visible = True
         self.status = MoleStatus.WAITING
         self.lastWaiting = pygame.time.get_ticks()
-        
+
     def changeModeToExit(self):
         self.active = True
         self.visible = True
         self.status = MoleStatus.EXIT
-        
+
     def changeModeToHidden(self):
         self.active = False
         self.visible = False
         self.status = MoleStatus.HIDDEN
-        
+
     def changeModeToNotStart(self):
         self.active = False
         self.visible = False
         self.status = MoleStatus.NOT_START
-        
+
     def processInput(self, m_x, m_y, hammer):
         if (not self.isDead and self.visible and isTouchOnRect(m_x, m_y, self.x-20, self.y-20, self.width+40, self.height+40)):
             self.onHit = True
@@ -539,23 +586,26 @@ class Mole:
             return 1
         return 0
 
+
 class PlayButton:
     def __init__(self):
         self.x = SCREEN_WIDTH/2 - PLAY_BUTTON_WIDTH/2 + 50
         self.y = SCREEN_HEIGHT*0.6
         self.visible = True
-        
+
     def update(self):
         self.render()
-    
+
     def render(self):
         if (self.visible):
             screen.blit(play_button_image, (self.x, self.y))
+
 
 def isTouchOnRect(x, y, rectX, rectY, rectWidth, rectHeight):
     if rectX < x and x < rectX + rectWidth and rectY < y and y < rectY + rectHeight:
         return True
     return False
+
 
 def main():
     currentScene = Scene.MENU_SCENE
@@ -563,10 +613,14 @@ def main():
     gameOver = True
     running = True
     grid = Grid(ROW, COL)
-    mole = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 - MOLE_WIDTH/2, GROUND_TOP_LEFT_Y , MoleType.NORMAL)
-    mole2 = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 - MOLE_WIDTH/2, GROUND_TOP_LEFT_Y , MoleType.NORMAL_2)
-    mole3 = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 - MOLE_WIDTH/2, GROUND_TOP_LEFT_Y , MoleType.NORMAL_3)
-    bomb = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 - BOMB_WIDTH/2, GROUND_TOP_LEFT_Y , MoleType.BOMB)
+    mole = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 -
+                MOLE_WIDTH/2, GROUND_TOP_LEFT_Y, MoleType.NORMAL)
+    mole2 = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 -
+                 MOLE_WIDTH/2, GROUND_TOP_LEFT_Y, MoleType.NORMAL_2)
+    mole3 = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 -
+                 MOLE_WIDTH/2, GROUND_TOP_LEFT_Y, MoleType.NORMAL_3)
+    bomb = Mole(grid, GROUND_TOP_LEFT_X + GROUND_WIDTH/2 -
+                BOMB_WIDTH/2, GROUND_TOP_LEFT_Y, MoleType.BOMB)
 
     clock = pygame.time.Clock()
     scoreLabel = ScoreLabel()
@@ -576,16 +630,16 @@ def main():
     playButton = PlayButton()
     hammer = Hammer(0, 0, grid)
     FPS = 20
-    
+
     total_hit = 0
     right_hit = 0
-    
+
     lastTime = pygame.time.get_ticks()
     deltaTime = 0
-    
+
     lastTimeExplode = pygame.time.get_ticks()
     lastTimeShowPlay = pygame.time.get_ticks()
-    
+
     mixer.music.play(-1)
     while running:
         clock.tick(FPS)
@@ -593,11 +647,11 @@ def main():
         deltaTime = now - lastTime
         lastTime = pygame.time.get_ticks()
         # print(deltaTime)
-            
+
         screen.fill(GREY)
         m_x, m_y = pygame.mouse.get_pos()
-        screen.blit(background_image, (0,0))
-        
+        screen.blit(background_image, (0, 0))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -628,7 +682,7 @@ def main():
                         mole3.respawn()
                         bomb.respawn()
                         showTimeOver = False
-        if (currentScene == Scene.GAME_SCENE):                
+        if (currentScene == Scene.GAME_SCENE):
             mole.update(deltaTime)
             mole2.update(deltaTime)
             mole3.update(deltaTime)
@@ -647,8 +701,8 @@ def main():
             playButton.update()
         hammer.update()
         if (gameOver and currentScene == Scene.GAME_SCENE):
-            if (not bomb.explode_animation.isRun or 
-                (bomb.explode_animation.isRun and pygame.time.get_ticks() - lastTimeExplode > 500)):
+            if (not bomb.explode_animation.isRun or
+                    (bomb.explode_animation.isRun and pygame.time.get_ticks() - lastTimeExplode > 500)):
                 timeLabel.stop()
                 playButton.visible = True
                 lastTimeShowPlay = pygame.time.get_ticks()
@@ -661,15 +715,17 @@ def main():
                 if (total_hit == 0):
                     AccuracyLabel.accuracy = 0
                 else:
-                    AccuracyLabel.accuracy = math.floor(right_hit/total_hit * 10000)/100.0
+                    AccuracyLabel.accuracy = math.floor(
+                        right_hit/total_hit * 10000)/100.0
                 total_hit = 0
                 right_hit = 0
-                    
-        
+
         if showTimeOver:
-            screen.blit(time_over_image, (SCREEN_WIDTH/2 - TIME_OVER_WIDTH/2 + 50, SCREEN_HEIGHT/2 - TIME_OVER_HEIGHT/2 - 100))
-            
+            screen.blit(time_over_image, (SCREEN_WIDTH/2 - TIME_OVER_WIDTH /
+                        2 + 50, SCREEN_HEIGHT/2 - TIME_OVER_HEIGHT/2 - 100))
+
         pygame.display.flip()
     pygame.quit()
-    
+
+
 main()

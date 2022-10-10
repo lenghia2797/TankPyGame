@@ -7,7 +7,8 @@ class ScoreLabel:
 
     def __init__(self, scene):
         self.scene = scene
-        self.text = font.render(
+        self.font = pygame.font.Font('freesansbold.ttf', 30)
+        self.text = self.font.render(
             f'Score: {ScoreLabel.score}', True, Constants.COLOR_TEXT)
         self.textRect = self.text.get_rect()
         self.textRect.center = (Constants.SCORE_LABEL_X,
@@ -17,7 +18,7 @@ class ScoreLabel:
         self.render()
 
     def render(self):
-        self.text = font.render(
+        self.text = self.font.render(
             f'Score: {ScoreLabel.score}', True, Constants.COLOR_TEXT)
 
         self.scene.screen.blit(self.text, (self.textRect.x +

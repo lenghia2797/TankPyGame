@@ -20,32 +20,11 @@ screen = pygame.display.set_mode(
     (Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
 pygame.display.set_caption('Tank')
 
-font = pygame.font.Font('freesansbold.ttf', 30)
-
 
 # mixer.init()
 # mixer.music.set_volume(0.1)
 
 # mixer.music.load('assets/sounds/bgm.mp3')
-class ScoreLabel:
-    score = 0
-
-    def __init__(self):
-        self.text = font.render(
-            f'Score: {ScoreLabel.score}', True, Constants.COLOR_TEXT)
-        self.textRect = self.text.get_rect()
-        self.textRect.center = (Constants.SCORE_LABEL_X,
-                                Constants.SCORE_LABEL_Y)
-
-    def update(self):
-        self.render()
-
-    def render(self):
-        self.text = font.render(
-            f'Score: {ScoreLabel.score}', True, Constants.COLOR_TEXT)
-
-        screen.blit(self.text, (self.textRect.x +
-                    self.textRect.width/2 - 50, self.textRect.y))
 
 
 # class PlayButton:
@@ -75,7 +54,6 @@ def main():
     running = True
 
     clock = pygame.time.Clock()
-    scoreLabel = ScoreLabel()
     # playButton = PlayButton()
     FPS = 60
 
@@ -115,7 +93,6 @@ def main():
         #         playButton.visible = False
 
         running = gameScene.update()
-        scoreLabel.update()
 
         # if (currentScene == Scene.MENU_SCENE):
         #     pass
