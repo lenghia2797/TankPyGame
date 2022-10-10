@@ -6,18 +6,20 @@ from Tank import Tank
 class Bullet(GameObject):
     def __init__(self, scene, x, y, width, height, image, depth):
         super().__init__(scene, x, y, width, height, image, depth)
-        self.speed = 3
         self.vx = 0
         self.xy = 0
         self.collide = 0
         self.tank: Tank
-        self.speed = 20
+        self.speed = 20/3
     
     def update(self):
         super().update()
         if self.active:
             self.x += self.vx
             self.y += self.vy
+            self.rect.x = self.x
+            self.rect.y = self.y
+            
         self.checkPosition()
     
     def checkPosition(self):
@@ -34,5 +36,5 @@ class Bullet(GameObject):
             self.vy *= -1
             self.collide += 1
             
-        if self.collide >= 2:
+        if self.collide >= 3:
             self.active = False

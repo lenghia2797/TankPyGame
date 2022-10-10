@@ -22,3 +22,9 @@ class Constants:
     BULLET_WIDTH = 20
     BULLET_HEIGHT = 20
     
+    TRIANGLE_WIDTH = 13
+    TRIANGLE_HEIGHT = 10
+    
+    WALL_WIDTH = 80
+    WALL_HEIGHT = 80
+    

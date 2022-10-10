@@ -36,6 +36,8 @@ class Scene:
                     self.inputHandler.process(m_x, m_y, 'down_s')
                 if event.key == pygame.K_x:
                     self.inputHandler.process(m_x, m_y, 'down_x')
+                if event.key == pygame.K_q:
+                    self.inputHandler.process(m_x, m_y, 'down_q')
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a:
                     self.inputHandler.process(m_x, m_y, 'up_a')

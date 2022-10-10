@@ -23,3 +23,9 @@ class TankState(Enum):
     ROTATE_RIGHT = 2
     UP = 3
     DOWN = 4
+    
+class TankType(Enum):
+    PLAYER_1 = 0
+    PLAYER_2 = 1
+    AI_1 = 2
+    AI_2 = 3

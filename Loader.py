@@ -3,7 +3,7 @@ import pygame
 
 class Loader:
     def __init__(self):
-        self.background_image = pygame.image.load(r'./assets/images/background.jpeg')
+        self.background_image = pygame.image.load(r'./assets/images/background.png')
         self.play_button_image = pygame.image.load(r'./assets/images/first_play_button.png')
 
         self.tank_blue_image = pygame.image.load(r'./assets/images/tank-blue-2.png')
@@ -16,3 +16,5 @@ class Loader:
         self.bullet_blue_image = pygame.image.load(r'./assets/images/bullet-blue.png')
         self.bullet_red_image = pygame.image.load(r'./assets/images/bullet-red.png')
         self.bullet_yellow_image = pygame.image.load(r'./assets/images/bullet-yellow.png')
+        self.triangle_image = pygame.image.load(r'./assets/images/triangle.png')
+        self.wall_image = pygame.image.load(r'./assets/images/wall.png')

@@ -70,7 +70,7 @@ def main():
     clock = pygame.time.Clock()
     scoreLabel = ScoreLabel()
     playButton = PlayButton()
-    FPS = 20
+    FPS = 60
     
     lastTime = pygame.time.get_ticks()
     deltaTime = 0
