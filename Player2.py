@@ -57,10 +57,10 @@ class Player2(Tank):
                 self.setAngle(self.angle - 1)
                 self.image = self.rot_center(self.scene.loader.tank_blue_image,
                                              self.angle)
-            if state == TankState.UP:
+            if state == TankState.DOWN:
                 self.y += self.speed * math.cos(self.angle * math.pi / 180)
                 self.x += self.speed * math.sin(self.angle * math.pi / 180)
-            if state == TankState.DOWN:
+            if state == TankState.UP:
                 self.y -= self.speed * math.cos(self.angle * math.pi / 180)
                 self.x -= self.speed * math.sin(self.angle * math.pi / 180)
 
