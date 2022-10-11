@@ -7,7 +7,7 @@ class Tank(GameObject):
     def __init__(self, scene, x, y, width, height, image, depth):
         super().__init__(scene, x, y, width, height, image, depth)
         self.states = [TankState.NORMAL]
-        self.type = TankType.PLAYER_1
+
         self.speed = 1
         self.angle = 0
         self.image = pygame.transform.rotate(self.image, self.angle)

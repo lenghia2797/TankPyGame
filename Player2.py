@@ -13,17 +13,17 @@ from Tank import Tank
 class Player2(Tank):
     def __init__(self, scene, x, y, width, height, image, depth):
         super().__init__(scene, x, y, width, height, image, depth)
-
-        self.setKey('down_a', self.onPressA)
-        self.setKey('down_d', self.onPressD)
-        self.setKey('down_w', self.onPressW)
-        self.setKey('down_s', self.onPressS)
-        self.setKey('down_x', self.scene.shootBullet)
-        self.setKey('down_q', self.switchPlayer)
-        self.setKey('up_a', self.onReleaseA)
-        self.setKey('up_d', self.onReleaseD)
-        self.setKey('up_w', self.onReleaseW)
-        self.setKey('up_s', self.onReleaseS)
+        self.type = TankType.PLAYER_2
+        self.setKey('down_left', self.onPressLeft)
+        self.setKey('down_right', self.onPressRight)
+        self.setKey('down_down', self.onPressDown)
+        self.setKey('down_up', self.onPressUp)
+        self.setKey('down_enter', self.scene.shootBullet)
+        self.setKey('down_o', self.switchPlayer)
+        self.setKey('up_left', self.onReleaseLeft)
+        self.setKey('up_right', self.onReleaseRight)
+        self.setKey('up_down', self.onReleaseDown)
+        self.setKey('up_up', self.onReleaseUp)
 
         self.triangle = GameObject(self.scene, self.x + Constants.TANK_WIDTH / 2,
                                    self.y, Constants.TRIANGLE_WIDTH - 5,
@@ -31,31 +31,31 @@ class Player2(Tank):
 
     def update(self):
         super().update()
-        if self.type == TankType.PLAYER_1:
+        if self.type == TankType.PLAYER_2:
             self.updateByState()
-        elif self.type == TankType.AI_1:
+        elif self.type == TankType.AI_2:
             self.autoMove()
 
         self.triangle.x = self.x + Constants.TANK_WIDTH / 2
         self.triangle.y = self.y - 5
 
     def switchPlayer(self):
-        if (self.type == TankType.PLAYER_1):
-            self.type = TankType.AI_1
+        if (self.type == TankType.PLAYER_2):
+            self.type = TankType.AI_2
             self.triangle.visible = False
-        elif (self.type == TankType.AI_1):
-            self.type = TankType.PLAYER_1
+        elif (self.type == TankType.AI_2):
+            self.type = TankType.PLAYER_2
             self.triangle.visible = True
 
     def updateByState(self):
         for state in self.states:
             if state == TankState.ROTATE_LEFT:
                 self.setAngle(self.angle + 1)
-                self.image = self.rot_center(self.scene.loader.tank_red_image,
+                self.image = self.rot_center(self.scene.loader.tank_blue_image,
                                              self.angle)
             if state == TankState.ROTATE_RIGHT:
                 self.setAngle(self.angle - 1)
-                self.image = self.rot_center(self.scene.loader.tank_red_image,
+                self.image = self.rot_center(self.scene.loader.tank_blue_image,
                                              self.angle)
             if state == TankState.UP:
                 self.y += self.speed * math.cos(self.angle * math.pi / 180)
@@ -64,36 +64,30 @@ class Player2(Tank):
                 self.y -= self.speed * math.cos(self.angle * math.pi / 180)
                 self.x -= self.speed * math.sin(self.angle * math.pi / 180)
 
-    def onReleaseA(self):
+    def onReleaseLeft(self):
+        print(1234)
         self.states.remove(TankState.ROTATE_LEFT)
 
-    def onReleaseD(self):
+    def onReleaseRight(self):
         self.states.remove(TankState.ROTATE_RIGHT)
 
-    def onReleaseW(self):
+    def onReleaseUp(self):
         self.states.remove(TankState.UP)
 
-    def onReleaseS(self):
+    def onReleaseDown(self):
         self.states.remove(TankState.DOWN)
 
-    def onPressA(self):
+    def onPressLeft(self):
         self.states.append(TankState.ROTATE_LEFT)
 
-    def onPressD(self):
+    def onPressRight(self):
         self.states.append(TankState.ROTATE_RIGHT)
 
-    def onPressW(self):
+    def onPressUp(self):
         self.states.append(TankState.UP)
 
-    def onPressS(self):
+    def onPressDown(self):
         self.states.append(TankState.DOWN)
 
     def autoMove(self):
         pass
-
-    def rot_center(self, image, angle):
-
-        loc = image.get_rect().center  # rot_image is not defined
-        rot_sprite = pygame.transform.rotate(image, angle)
-        rot_sprite.get_rect().center = loc
-        return rot_sprite

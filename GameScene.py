@@ -7,6 +7,7 @@ from Enemy import Enemy
 from Enum import TankType
 from GameObject import GameObject
 from Player import Player
+from Player2 import Player2
 from Scene import Scene
 from ScoreLabel import ScoreLabel
 from Tank import Tank
@@ -20,24 +21,35 @@ def onClickPlayer():
 class GameScene(Scene):
     def __init__(self, screen):
         super().__init__(screen)
+        self.gameMode = 2
+
         self.redBullets = []
         self.blueBullets = []
 
         self.background = GameObject(self, 0, 0, Constants.SCREEN_WIDTH,
                                      Constants.SCREEN_HEIGHT, self.loader.background_image, 0)
-        self.player = Player(self, 100, 100, Constants.TANK_WIDTH,
-                             Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
-        self.player2 = Player(self, 100, 300, Constants.TANK_WIDTH,
-                              Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
-        self.player2.type = TankType.AI_1
-        self.player2.triangle.visible = False
+        self.player_1_1 = Player(self, 100, 100, Constants.TANK_WIDTH,
+                                 Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
+        self.player_1_2 = Player(self, 100, 300, Constants.TANK_WIDTH,
+                                 Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
+        self.player_1_2.type = TankType.AI_1
+        self.player_1_2.triangle.visible = False
 
-        self.enemy = Enemy(self, 700, 100, Constants.TANK_WIDTH, Constants.TANK_HEIGHT,
-                           self.loader.tank_blue_image, 3)
-        self.enemy.setAngle(90)
-        self.enemy.image = self.enemy.rot_center(self.loader.tank_blue_image,
-                                                 self.enemy.angle)
-        self.enemy.type = TankType.ENEMY_1
+        if self.gameMode == 2:
+            self.player_2_1 = Player2(self, 800, 100, Constants.TANK_WIDTH,
+                                      Constants.TANK_HEIGHT, self.loader.tank_blue_image, 3)
+            self.player_2_2 = Player2(self, 800, 300, Constants.TANK_WIDTH,
+                                      Constants.TANK_HEIGHT, self.loader.tank_blue_image, 3)
+            self.player_2_2.type = TankType.AI_2
+            self.player_2_2.triangle.visible = False
+        else:
+
+            self.enemy = Enemy(self, 700, 100, Constants.TANK_WIDTH, Constants.TANK_HEIGHT,
+                               self.loader.tank_blue_image, 3)
+            self.enemy.setAngle(90)
+            self.enemy.image = self.enemy.rot_center(self.loader.tank_blue_image,
+                                                     self.enemy.angle)
+            self.enemy.type = TankType.ENEMY_1
 
         self.wall = Wall(self, 400, 400, Constants.WALL_WIDTH,
                          Constants.WALL_HEIGHT, self.loader.wall_image, 3)
@@ -45,7 +57,7 @@ class GameScene(Scene):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
                             Constants.BULLET_HEIGHT, self.loader.bullet_red_image, 2)
             bullet.active = False
-            bullet.tank = self.player
+            bullet.tank = self.player_1_1
             self.add(bullet)
             self.redBullets.append(bullet)
 
@@ -53,17 +65,24 @@ class GameScene(Scene):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
                             Constants.BULLET_HEIGHT, self.loader.bullet_blue_image, 2)
             bullet.active = False
-            bullet.tank = self.enemy
+            if self.gameMode == 2:
+                bullet.tank = self.player_2_1
+            else:
+                bullet.tank = self.enemy
             self.add(bullet)
             self.blueBullets.append(bullet)
 
         self.add(self.background)
-        self.add(self.player)
-        self.add(self.player2)
-        self.add(self.player.triangle)
-        self.add(self.player2.triangle)
+        self.add(self.player_1_1)
+        self.add(self.player_1_2)
+        self.add(self.player_1_1.triangle)
+        self.add(self.player_1_2.triangle)
         self.add(self.wall)
-        self.add(self.enemy)
+        if self.gameMode == 2:
+            self.add(self.player_2_1)
+            self.add(self.player_2_2)
+        else:
+            self.add(self.enemy)
 
         self.scoreLabel = ScoreLabel(self)
 
@@ -71,9 +90,13 @@ class GameScene(Scene):
         running = super().update()
         self.checkCollisionBulletWall(self.redBullets)
         self.checkCollisionBulletWall(self.blueBullets)
-        self.checkCollisionBulletTank(self.redBullets, self.enemy)
-        self.checkCollisionBulletTank(self.blueBullets, self.player)
-        self.checkCollisionBulletTank(self.blueBullets, self.player2)
+        if self.gameMode == 2:
+            self.checkCollisionBulletTank(self.redBullets, self.player_2_1)
+            self.checkCollisionBulletTank(self.redBullets, self.player_2_2)
+        else:
+            self.checkCollisionBulletTank(self.redBullets, self.enemy)
+        self.checkCollisionBulletTank(self.blueBullets, self.player_1_1)
+        self.checkCollisionBulletTank(self.blueBullets, self.player_1_2)
 
         self.scoreLabel.update()
 
@@ -109,7 +132,6 @@ class GameScene(Scene):
                     bullet.visible = False
                     bullet.x = -100
                     if tank.type == TankType.ENEMY_1:
-                        print(123)
                         ScoreLabel.score += 1
 
     def shootBullet(self):
@@ -118,10 +140,16 @@ class GameScene(Scene):
             bullet.active = True
             bullet.visible = True
             bullet.collide = 0
-            if self.player.type == TankType.PLAYER_1:
-                bullet.tank = self.player
-            elif self.player.type == TankType.AI_1:
-                bullet.tank = self.player2
+            if self.gameMode == 1:
+                if self.player_1_1.type == TankType.PLAYER_1:
+                    bullet.tank = self.player_1_1
+                elif self.player_1_1.type == TankType.AI_1:
+                    bullet.tank = self.player_1_2
+            else:
+                if self.player_2_1.type == TankType.PLAYER_2:
+                    bullet.tank = self.player_2_1
+                elif self.player_2_1.type == TankType.AI_2:
+                    bullet.tank = self.player_2_1
             bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
             bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
             bullet.vx = bullet.speed * \

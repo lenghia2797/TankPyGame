@@ -13,7 +13,7 @@ from Tank import Tank
 class Player(Tank):
     def __init__(self, scene, x, y, width, height, image, depth):
         super().__init__(scene, x, y, width, height, image, depth)
-
+        self.type = TankType.PLAYER_1
         self.setKey('down_a', self.onPressA)
         self.setKey('down_d', self.onPressD)
         self.setKey('down_w', self.onPressW)
