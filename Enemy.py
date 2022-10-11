@@ -16,7 +16,7 @@ class Enemy(Tank):
         self.speedY = 2
         self.rawY = y
         self.moveDown = True
-        self.lastTimeShoot = pygame.time.get_ticks()
+
         self.timeShoot = 500
 
     def update(self):

@@ -1,4 +1,6 @@
+import math
 import pygame
+from Constants import Constants
 from Enum import TankState, TankType
 from GameObject import GameObject
 
@@ -11,6 +13,9 @@ class Tank(GameObject):
         self.speed = 1
         self.angle = 0
         self.image = pygame.transform.rotate(self.image, self.angle)
+
+        self.lastTimeShoot = pygame.time.get_ticks()
+        self.timeShoot = 200
 
     def update(self):
         super().update()

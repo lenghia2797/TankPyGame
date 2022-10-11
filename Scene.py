@@ -47,7 +47,7 @@ class Scene:
                     self.inputHandler.process(m_x, m_y, 'down_up')
                 if event.key == pygame.K_DOWN:
                     self.inputHandler.process(m_x, m_y, 'down_down')
-                if event.key == pygame.K_KP_ENTER:
+                if event.key == pygame.K_RETURN:
                     self.inputHandler.process(m_x, m_y, 'down_enter')
                 if event.key == pygame.K_o:
                     self.inputHandler.process(m_x, m_y, 'down_o')
@@ -71,7 +71,7 @@ class Scene:
                     self.inputHandler.process(m_x, m_y, 'up_up')
                 if event.key == pygame.K_DOWN:
                     self.inputHandler.process(m_x, m_y, 'up_down')
-                if event.key == pygame.K_KP_ENTER:
+                if event.key == pygame.K_RETURN:
                     self.inputHandler.process(m_x, m_y, 'up_enter')
                 if event.key == pygame.K_o:
                     self.inputHandler.process(m_x, m_y, 'up_o')

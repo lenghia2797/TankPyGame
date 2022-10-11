@@ -81,6 +81,8 @@ class GameScene(Scene):
         if self.gameMode == 2:
             self.add(self.player_2_1)
             self.add(self.player_2_2)
+            self.add(self.player_2_1.triangle)
+            self.add(self.player_2_2.triangle)
         else:
             self.add(self.enemy)
 
@@ -137,25 +139,41 @@ class GameScene(Scene):
     def shootBullet(self):
         bullet = self.getRedDeadBullet()
         if bullet:
-            bullet.active = True
-            bullet.visible = True
-            bullet.collide = 0
-            if self.gameMode == 1:
-                if self.player_1_1.type == TankType.PLAYER_1:
-                    bullet.tank = self.player_1_1
-                elif self.player_1_1.type == TankType.AI_1:
-                    bullet.tank = self.player_1_2
-            else:
+            if self.player_1_1.type == TankType.PLAYER_1:
+                bullet.tank = self.player_1_1
+            elif self.player_1_1.type == TankType.AI_1:
+                bullet.tank = self.player_1_2
+
+            now = pygame.time.get_ticks()
+            if now - bullet.tank.lastTimeShoot > bullet.tank.timeShoot:
+                bullet.tank.lastTimeShoot = now
+                self.shoot(bullet)
+
+    def shootBullet2(self):
+        bullet = self.getBlueDeadBullet()
+        if bullet:
+            if self.gameMode == 2:
                 if self.player_2_1.type == TankType.PLAYER_2:
                     bullet.tank = self.player_2_1
                 elif self.player_2_1.type == TankType.AI_2:
-                    bullet.tank = self.player_2_1
-            bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
-            bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
-            bullet.vx = bullet.speed * \
-                math.sin((bullet.tank.angle - 180) * math.pi / 180)
-            bullet.vy = bullet.speed * \
-                math.cos((bullet.tank.angle - 180) * math.pi / 180)
+                    bullet.tank = self.player_2_2
+
+            now = pygame.time.get_ticks()
+            if now - bullet.tank.lastTimeShoot > bullet.tank.timeShoot:
+                bullet.tank.lastTimeShoot = now
+                self.shoot(bullet)
+
+    def shoot(self, bullet):
+        bullet.active = True
+        bullet.visible = True
+        bullet.collide = 0
+
+        bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
+        bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
+        bullet.vx = bullet.speed * \
+            math.sin((bullet.tank.angle - 180) * math.pi / 180)
+        bullet.vy = bullet.speed * \
+            math.cos((bullet.tank.angle - 180) * math.pi / 180)
 
     def getRedDeadBullet(self):
         for bullet in self.redBullets:
