@@ -117,6 +117,7 @@ class GameScene(Scene):
                 wall_rect = pygame.Rect(self.wall.x, self.wall.y,
                                         self.wall.width, self.wall.height)
                 if bullet_rect.colliderect(wall_rect):
+                    bullet.collide += 1
                     if abs(wall_rect.top - bullet_rect.bottom) < collision_tolerance and bullet.vy > 0:
                         bullet.vy *= -1
                     if abs(wall_rect.bottom - bullet_rect.top) < collision_tolerance and bullet.vy < 0:
