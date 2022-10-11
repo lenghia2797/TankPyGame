@@ -1,5 +1,6 @@
 
 import math
+import random
 from xml.etree.ElementInclude import include
 import pygame
 from Bullet import Bullet
@@ -15,14 +16,19 @@ class Enemy(Tank):
         super().__init__(scene, x, y, width, height, image, depth)
         self.speedY = 2
         self.rawY = y
+        self.rawX = x
         self.moveDown = True
+        self.moveLeft = True
 
         self.timeShoot = 500
+        self.lastTimeRotate = pygame.time.get_ticks()
+        self.timeRotate = 1500
 
     def update(self):
         super().update()
         self.autoMove()
         self.updateShoot()
+        self.updateByState()
 
     def updateShoot(self):
         now = pygame.time.get_ticks()
@@ -34,11 +40,11 @@ class Enemy(Tank):
         for state in self.states:
             if state == TankState.ROTATE_LEFT:
                 self.setAngle(self.angle + 1)
-                self.image = self.rot_center(self.scene.loader.tank_red_image,
+                self.image = self.rot_center(self.scene.loader.tank_blue_image,
                                              self.angle)
             if state == TankState.ROTATE_RIGHT:
                 self.setAngle(self.angle - 1)
-                self.image = self.rot_center(self.scene.loader.tank_red_image,
+                self.image = self.rot_center(self.scene.loader.tank_blue_image,
                                              self.angle)
             if state == TankState.UP:
                 self.y += self.speed * math.cos(self.angle * math.pi / 180)
@@ -56,6 +62,25 @@ class Enemy(Tank):
             self.y -= self.speed
             if self.y < self.rawY:
                 self.moveDown = True
+        if self.moveLeft:
+            self.x += self.speed
+            if self.x > self.rawX + 150:
+                self.moveLeft = False
+        else:
+            self.x -= self.speed
+            if self.x < self.rawX:
+                self.moveLeft = True
+        self.rotate()
+
+    def rotate(self):
+        now = pygame.time.get_ticks()
+        if now - self.lastTimeRotate > self.timeRotate:
+            for state in self.states:
+                if state == TankState.ROTATE_LEFT:
+                    self.states.remove(TankState.ROTATE_LEFT)
+            self.timeRotate = 1500 + 3000*random.random()
+            self.lastTimeRotate = now
+            self.states.append(TankState.ROTATE_LEFT)
 
     def shootBullet(self):
         bullet = self.scene.getBlueDeadBullet()

@@ -21,7 +21,7 @@ def onClickPlayer():
 class GameScene(Scene):
     def __init__(self, screen):
         super().__init__(screen)
-        self.gameMode = 2
+        self.gameMode = 1
 
         self.redBullets = []
         self.blueBullets = []
