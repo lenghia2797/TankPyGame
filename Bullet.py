@@ -11,11 +11,16 @@ class Bullet(GameObject):
         self.xy = 0
         self.collide = 0
         self.tank: Tank
-        self.speed = 20/3
+        self.speed = 25/3
+
+        self.a = -0.05
 
     def update(self):
         super().update()
         if self.active:
+            self.vx *= 0.998
+            self.vy *= 0.998
+
             self.x += self.vx
             self.y += self.vy
             self.rect.x = self.x
