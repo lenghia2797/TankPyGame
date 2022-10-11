@@ -9,7 +9,7 @@ from GameObject import GameObject
 from Player import Player
 from Player2 import Player2
 from Scene import Scene
-from ScoreLabel import ScoreLabel
+from ScoreLabel import ScoreLabel, ScoreLabel2
 from Tank import Tank
 from Wall import Wall
 
@@ -58,6 +58,7 @@ class GameScene(Scene):
                             Constants.BULLET_HEIGHT, self.loader.bullet_red_image, 2)
             bullet.active = False
             bullet.tank = self.player_1_1
+            bullet.color = 1
             self.add(bullet)
             self.redBullets.append(bullet)
 
@@ -65,6 +66,7 @@ class GameScene(Scene):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
                             Constants.BULLET_HEIGHT, self.loader.bullet_blue_image, 2)
             bullet.active = False
+            bullet.color = 2
             if self.gameMode == 2:
                 bullet.tank = self.player_2_1
             else:
@@ -87,6 +89,7 @@ class GameScene(Scene):
             self.add(self.enemy)
 
         self.scoreLabel = ScoreLabel(self)
+        self.scoreLabel2 = ScoreLabel2(self)
 
     def update(self):
         running = super().update()
@@ -101,6 +104,7 @@ class GameScene(Scene):
         self.checkCollisionBulletTank(self.blueBullets, self.player_1_2)
 
         self.scoreLabel.update()
+        self.scoreLabel2.update()
 
         return running
 
@@ -133,8 +137,10 @@ class GameScene(Scene):
                     bullet.active = False
                     bullet.visible = False
                     bullet.x = -100
-                    if tank.type == TankType.ENEMY_1:
+                    if bullet.color == 1 and (tank.type == TankType.ENEMY_1 or tank.type == TankType.PLAYER_2 or tank.type == TankType.AI_2):
                         ScoreLabel.score += 1
+                    if bullet.color == 2 and (tank.type == TankType.PLAYER_1 or tank.type == TankType.AI_1):
+                        ScoreLabel2.score += 1
 
     def shootBullet(self):
         bullet = self.getRedDeadBullet()
