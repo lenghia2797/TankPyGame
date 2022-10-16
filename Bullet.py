@@ -1,6 +1,6 @@
 from Constants import Constants
 from Enum import TankState
-from GameObject import GameObject
+from gamecore.GameObject import GameObject
 from Tank import Tank
 
 

@@ -1,8 +1,8 @@
 import pygame
-from GameObject import GameObject
-from InputHandler import InputHandler
-from Loader import Loader
-from Renderer import Renderer
+from gamecore.GameObject import GameObject
+from gamecore.InputHandler import InputHandler
+from gamecore.Loader import Loader
+from gamecore.Renderer import Renderer
 
 
 class Scene:

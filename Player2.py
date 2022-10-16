@@ -5,8 +5,8 @@ import pygame
 from Bullet import Bullet
 from Constants import Constants
 from Enum import TankState, TankType
-from GameObject import GameObject
-from Loader import Loader
+from gamecore.GameObject import GameObject
+from gamecore.Loader import Loader
 from Tank import Tank
 
 

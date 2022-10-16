@@ -9,7 +9,7 @@ import sys
 import random
 from enum import Enum
 from pygame import mixer
-from GameObject import GameObject
+from gamecore.GameObject import GameObject
 from GameScene import GameScene
 
 from spritesheet import SpriteSheet

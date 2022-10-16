@@ -1,4 +1,4 @@
-from GameObject import GameObject
+from gamecore.GameObject import GameObject
 
 
 class Renderer:

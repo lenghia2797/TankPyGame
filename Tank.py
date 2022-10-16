@@ -2,7 +2,7 @@ import math
 import pygame
 from Constants import Constants
 from Enum import TankState, TankType
-from GameObject import GameObject
+from gamecore.GameObject import GameObject
 
 
 class Tank(GameObject):

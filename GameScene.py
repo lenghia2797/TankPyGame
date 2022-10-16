@@ -5,10 +5,10 @@ from Bullet import Bullet
 from Constants import Constants
 from Enemy import Enemy
 from Enum import TankType
-from GameObject import GameObject
+from gamecore.GameObject import GameObject
 from Player import Player
 from Player2 import Player2
-from Scene import Scene
+from gamecore.Scene import Scene
 from ScoreLabel import ScoreLabel, ScoreLabel2
 from Tank import Tank
 from Wall import Wall
@@ -21,7 +21,7 @@ def onClickPlayer():
 class GameScene(Scene):
     def __init__(self, screen):
         super().__init__(screen)
-        self.gameMode = 1
+        self.gameMode = 2
 
         self.redBullets = []
         self.blueBullets = []
