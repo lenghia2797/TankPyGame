@@ -1,8 +1,7 @@
 from Constants import Constants
 from Enum import TankState
 from gamecore.GameObject import GameObject
-from Tank import Tank
-
+from objects.Tank import Tank
 
 class Bullet(GameObject):
     def __init__(self, scene, x, y, width, height, image, depth):

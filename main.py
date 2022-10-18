@@ -9,6 +9,7 @@ import sys
 import random
 from enum import Enum
 from pygame import mixer
+from MenuScene import MenuScene
 from gamecore.Game import Game
 from gamecore.GameObject import GameObject
 from GameScene import GameScene
@@ -69,7 +70,9 @@ def main():
     sceneManager = SceneManager(game)
     
     gameScene = GameScene(screen, game, sceneManager)
+    menuScene = MenuScene(screen, game, sceneManager)
     sceneManager.sceneList.append(gameScene)
+    sceneManager.sceneList.append(menuScene)
 
     # mixer.music.play(-1)
 

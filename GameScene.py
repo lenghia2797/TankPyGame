@@ -1,18 +1,18 @@
 import math
 import random
 import pygame
-from Bullet import Bullet
+from objects.Bullet import Bullet
 from Constants import Constants
-from Enemy import Enemy
+from objects.Enemy import Enemy
 from Enum import TankType
 from gamecore.Game import Game
 from gamecore.GameObject import GameObject
-from Player import Player
-from Player2 import Player2
+from objects.Player import Player
+from objects.Player2 import Player2
 from gamecore.Scene import Scene
 from ScoreLabel import ScoreLabel, ScoreLabel2
-from Tank import Tank
-from Wall import Wall
+from objects.Tank import Tank
+from objects.Wall import Wall
 from gamecore.SceneManager import SceneManager
 
 

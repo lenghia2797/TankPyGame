@@ -3,12 +3,12 @@ import math
 import random
 from xml.etree.ElementInclude import include
 import pygame
-from Bullet import Bullet
+from objects.Bullet import Bullet
 from Constants import Constants
 from Enum import TankState, TankType
 from gamecore.GameObject import GameObject
 from gamecore.Loader import Loader
-from Tank import Tank
+from objects.Tank import Tank
 
 
 class Enemy(Tank):
