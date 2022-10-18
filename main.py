@@ -9,8 +9,10 @@ import sys
 import random
 from enum import Enum
 from pygame import mixer
+from gamecore.Game import Game
 from gamecore.GameObject import GameObject
 from GameScene import GameScene
+from gamecore.SceneManager import SceneManager
 
 from spritesheet import SpriteSheet
 
@@ -62,10 +64,16 @@ def main():
 
     lastTimeExplode = pygame.time.get_ticks()
     lastTimeShowPlay = pygame.time.get_ticks()
+    
+    game = Game()
+    sceneManager = SceneManager(game)
+    
+    gameScene = GameScene(screen, game, sceneManager)
+    sceneManager.sceneList.append(gameScene)
 
     # mixer.music.play(-1)
 
-    gameScene = GameScene(screen)
+    # gameScene = GameScene(screen, game)
 
     while running:
         clock.tick(FPS)
@@ -92,7 +100,7 @@ def main():
         #         ScoreLabel.score = 0
         #         playButton.visible = False
 
-        running = gameScene.update()
+        running = sceneManager.update()
 
         # if (currentScene == Scene.MENU_SCENE):
         #     pass

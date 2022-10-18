@@ -1,16 +1,17 @@
 import pygame
+from gamecore.Game import Game
 from gamecore.GameObject import GameObject
 from gamecore.InputHandler import InputHandler
-from gamecore.Loader import Loader
 from gamecore.Renderer import Renderer
-
+from gamecore.SceneManager import SceneManager
 
 class Scene:
-    def __init__(self, screen):
+    def __init__(self, screen, game: Game, sceneManager: SceneManager):
         self.screen = screen
+        self.game = game
+        self.sceneManager = sceneManager
         self.renderer: Renderer = Renderer(self)
         self.inputHandler: InputHandler = InputHandler(self)
-        self.loader: Loader = Loader()
 
         self.objects: GameObject[100] = []
 

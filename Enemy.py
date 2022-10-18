@@ -40,11 +40,11 @@ class Enemy(Tank):
         for state in self.states:
             if state == TankState.ROTATE_LEFT:
                 self.setAngle(self.angle + 1)
-                self.image = self.rot_center(self.scene.loader.tank_blue_image,
+                self.image = self.rot_center(self.scene.game.loader.tank_blue_image,
                                              self.angle)
             if state == TankState.ROTATE_RIGHT:
                 self.setAngle(self.angle - 1)
-                self.image = self.rot_center(self.scene.loader.tank_blue_image,
+                self.image = self.rot_center(self.scene.game.loader.tank_blue_image,
                                              self.angle)
             if state == TankState.UP:
                 self.y += self.speed * math.cos(self.angle * math.pi / 180)

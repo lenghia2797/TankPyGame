@@ -1,4 +1,8 @@
 class Constants:
+    MENU_SCENE = 'MenuScene'
+    GAME_SCENE = 'GameScene'
+    
+    
     SCREEN_WIDTH = 960
     SCREEN_HEIGHT = 540
 

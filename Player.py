@@ -27,7 +27,7 @@ class Player(Tank):
 
         self.triangle = GameObject(self.scene, self.x + Constants.TANK_WIDTH / 2,
                                    self.y, Constants.TRIANGLE_WIDTH - 5,
-                                   Constants.TRIANGLE_HEIGHT, self.scene.loader.triangle_image, 4)
+                                   Constants.TRIANGLE_HEIGHT, self.scene.game.loader.triangle_image, 4)
 
     def update(self):
         super().update()
@@ -51,11 +51,11 @@ class Player(Tank):
         for state in self.states:
             if state == TankState.ROTATE_LEFT:
                 self.setAngle(self.angle + 1)
-                self.image = self.rot_center(self.scene.loader.tank_red_image,
+                self.image = self.rot_center(self.scene.game.loader.tank_red_image,
                                              self.angle)
             if state == TankState.ROTATE_RIGHT:
                 self.setAngle(self.angle - 1)
-                self.image = self.rot_center(self.scene.loader.tank_red_image,
+                self.image = self.rot_center(self.scene.game.loader.tank_red_image,
                                              self.angle)
             if state == TankState.DOWN:
                 self.y += self.speed * math.cos(self.angle * math.pi / 180)

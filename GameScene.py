@@ -5,6 +5,7 @@ from Bullet import Bullet
 from Constants import Constants
 from Enemy import Enemy
 from Enum import TankType
+from gamecore.Game import Game
 from gamecore.GameObject import GameObject
 from Player import Player
 from Player2 import Player2
@@ -12,6 +13,7 @@ from gamecore.Scene import Scene
 from ScoreLabel import ScoreLabel, ScoreLabel2
 from Tank import Tank
 from Wall import Wall
+from gamecore.SceneManager import SceneManager
 
 
 def onClickPlayer():
@@ -19,43 +21,44 @@ def onClickPlayer():
 
 
 class GameScene(Scene):
-    def __init__(self, screen):
-        super().__init__(screen)
+    def __init__(self, screen, game: Game, sceneManager: SceneManager):
+        super().__init__(screen, game, sceneManager)
+        self.name = Constants.GAME_SCENE
         self.gameMode = 2
 
         self.redBullets = []
         self.blueBullets = []
 
         self.background = GameObject(self, 0, 0, Constants.SCREEN_WIDTH,
-                                     Constants.SCREEN_HEIGHT, self.loader.background_image, 0)
+                                     Constants.SCREEN_HEIGHT, self.game.loader.background_image, 0)
         self.player_1_1 = Player(self, 100, 100, Constants.TANK_WIDTH,
-                                 Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
+                                 Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
         self.player_1_2 = Player(self, 100, 300, Constants.TANK_WIDTH,
-                                 Constants.TANK_HEIGHT, self.loader.tank_red_image, 3)
+                                 Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
         self.player_1_2.type = TankType.AI_1
         self.player_1_2.triangle.visible = False
 
         if self.gameMode == 2:
             self.player_2_1 = Player2(self, 800, 100, Constants.TANK_WIDTH,
-                                      Constants.TANK_HEIGHT, self.loader.tank_blue_image, 3)
+                                      Constants.TANK_HEIGHT, self.game.loader.tank_blue_image, 3)
             self.player_2_2 = Player2(self, 800, 300, Constants.TANK_WIDTH,
-                                      Constants.TANK_HEIGHT, self.loader.tank_blue_image, 3)
+                                      Constants.TANK_HEIGHT, self.game.loader.tank_blue_image, 3)
             self.player_2_2.type = TankType.AI_2
             self.player_2_2.triangle.visible = False
         else:
 
             self.enemy = Enemy(self, 700, 100, Constants.TANK_WIDTH, Constants.TANK_HEIGHT,
-                               self.loader.tank_blue_image, 3)
+                               self.game.loader.tank_blue_image, 3)
             self.enemy.setAngle(90)
-            self.enemy.image = self.enemy.rot_center(self.loader.tank_blue_image,
+            self.enemy.image = self.enemy.rot_center(self.game.loader.tank_blue_image,
                                                      self.enemy.angle)
             self.enemy.type = TankType.ENEMY_1
 
         self.wall = Wall(self, 400, 400, Constants.WALL_WIDTH,
-                         Constants.WALL_HEIGHT, self.loader.wall_image, 3)
+                         Constants.WALL_HEIGHT, self.game.loader.wall_image, 3)
         for i in range(10):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
-                            Constants.BULLET_HEIGHT, self.loader.bullet_red_image, 2)
+                            Constants.BULLET_HEIGHT, self.game.loader.bullet_red_image, 2)
             bullet.active = False
             bullet.tank = self.player_1_1
             bullet.color = 1
@@ -64,7 +67,7 @@ class GameScene(Scene):
 
         for i in range(10):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
-                            Constants.BULLET_HEIGHT, self.loader.bullet_blue_image, 2)
+                            Constants.BULLET_HEIGHT, self.game.loader.bullet_blue_image, 2)
             bullet.active = False
             bullet.color = 2
             if self.gameMode == 2:
