@@ -31,3 +31,7 @@ class Loader:
         self.triangle_image = pygame.image.load(
             r'./assets/images/triangle.png')
         self.wall_image = pygame.image.load(r'./assets/images/wall.png')
+        
+        self.new_game_image = pygame.image.load(r'./assets/images/img_new_game.png')
+        self.start_image = pygame.image.load(r'./assets/images/img_start.png')
+        

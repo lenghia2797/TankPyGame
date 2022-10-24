@@ -2,7 +2,7 @@ from Constants import Constants
 
 class SceneManager:
     sceneList = []
-    CurrentSceneName = Constants.GAME_SCENE
+    CurrentSceneName = Constants.MENU_SCENE
     def __init__(self, game):
         self.game = game
     
