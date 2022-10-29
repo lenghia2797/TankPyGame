@@ -25,7 +25,7 @@ class Bullet(GameObject):
             self.rect.x = self.x
             self.rect.y = self.y
 
-            self.checkPosition()
+            # self.checkPosition()
 
     def checkPosition(self):
         if self.x < 0:

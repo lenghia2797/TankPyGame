@@ -85,3 +85,9 @@ class Scene:
         for object in self.objects:
             if object.active:
                 object.update()
+                
+    def updateCameraOffsetObject(self, x, y):
+        for object in self.objects:
+            if object.active:
+                object.cameraOffsetX = x
+                object.cameraOffsetY = y

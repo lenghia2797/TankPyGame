@@ -20,7 +20,7 @@ from spritesheet import SpriteSheet
 pygame.init()
 
 screen = pygame.display.set_mode(
-    (Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
+    (Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), 1)
 pygame.display.set_caption('Tank')
 
 
@@ -51,7 +51,7 @@ def isTouchOnRect(x, y, rectX, rectY, rectWidth, rectHeight):
 
 
 def main():
-    currentScene = SceneKeys.MENU_SCENE
+    currentScene = SceneKeys.GAME_SCENE
     showTimeOver = False
     gameOver = True
     running = True

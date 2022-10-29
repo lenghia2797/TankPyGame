@@ -18,13 +18,20 @@ class GameObject:
         self.onClickFunc: Any
         self.haveKey = False
         self.keys = []
+        self.ignoreCamera = False
+        self.cameraOffsetX = 0
+        self.cameraOffsetY = 0
 
     def update(self):
         pass
 
     def render(self):
-        self.scene.screen.blit(
+        if self.ignoreCamera:
+            self.scene.screen.blit(
             self.image, (self.x, self.y, self.width, self.height))
+        else:
+            self.scene.screen.blit(
+            self.image, (self.x + self.cameraOffsetX, self.y + self.cameraOffsetY, self.width, self.height))
 
     def setOnClick(self, onClickFunc):
         self.interactive = True
@@ -40,3 +47,6 @@ class GameObject:
         rot_sprite = pygame.transform.rotate(image, angle)
         rot_sprite.get_rect().center = loc
         return rot_sprite
+    
+    def setScale(self, x, y):
+        self.image = pygame.transform.scale(self.image, (self.width*x, self.height*y))

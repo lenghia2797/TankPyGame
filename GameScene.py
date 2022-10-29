@@ -12,9 +12,9 @@ from objects.Player2 import Player2
 from gamecore.Scene import Scene
 from ScoreLabel import ScoreLabel, ScoreLabel2
 from objects.Tank import Tank
+from objects.TileMap import TileMap
 from objects.Wall import Wall
 from gamecore.SceneManager import SceneManager
-
 
 def onClickPlayer():
     print(random.random())
@@ -29,10 +29,12 @@ class GameScene(Scene):
         self.redBullets = []
         self.blueBullets = []
 
-        self.background = GameObject(self, 0, 0, Constants.SCREEN_WIDTH,
-                                     Constants.SCREEN_HEIGHT, self.game.loader.background_image, 0)
-        self.player_1_1 = Player(self, 100, 100, Constants.TANK_WIDTH,
+        # self.background = GameObject(self, -200, -200, Constants.SCREEN_WIDTH * 4,
+                                    #  Constants.SCREEN_HEIGHT * 4, self.game.loader.background_image, 0)
+        self.player_1_1 = Player(self, 960/2, 540/2, Constants.TANK_WIDTH,
                                  Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
+        # self.player_1_1.ignoreCamera = True
+        # self.player_1_1.triangle.ignoreCamera = True
         self.player_1_2 = Player(self, 100, 300, Constants.TANK_WIDTH,
                                  Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
         self.player_1_2.type = TankType.AI_1
@@ -77,7 +79,7 @@ class GameScene(Scene):
             self.add(bullet)
             self.blueBullets.append(bullet)
 
-        self.add(self.background)
+        # self.add(self.background)
         self.add(self.player_1_1)
         self.add(self.player_1_2)
         self.add(self.player_1_1.triangle)
@@ -93,9 +95,17 @@ class GameScene(Scene):
 
         self.scoreLabel = ScoreLabel(self)
         self.scoreLabel2 = ScoreLabel2(self)
+        
+        self.map = TileMap(self, 'assets/map.csv')
 
     def update(self):
+        self.screen.fill((243, 199, 79))
+        self.updateCameraOffsetObject(
+            Constants.SCREEN_WIDTH/2 - self.player_1_1.x, 
+            Constants.SCREEN_HEIGHT/2 - self.player_1_1.y
+        )
         running = super().update()
+        
         self.checkCollisionBulletWall(self.redBullets)
         self.checkCollisionBulletWall(self.blueBullets)
         if self.gameMode == 2:
