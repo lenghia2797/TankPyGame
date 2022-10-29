@@ -13,6 +13,10 @@ from objects.Tank import Tank
 class Player(Tank):
     def __init__(self, scene, x, y, width, height, image, depth):
         super().__init__(scene, x, y, width, height, image, depth)
+        self.canMoveLeft = True
+        self.canMoveRight = True
+        self.canMoveUp = True
+        self.canMoveDown = True
         self.type = TankType.PLAYER_1
         self.setKey('down_a', self.onPressA)
         self.setKey('down_d', self.onPressD)
@@ -48,6 +52,8 @@ class Player(Tank):
             self.triangle.visible = True
 
     def updateByState(self):
+        dx = 0
+        dy = 0
         for state in self.states:
             if state == TankState.ROTATE_LEFT:
                 self.setAngle(self.angle + 1)
@@ -58,11 +64,31 @@ class Player(Tank):
                 self.image = self.rot_center(self.scene.game.loader.tank_red_image,
                                              self.angle)
             if state == TankState.DOWN:
-                self.y += self.speed * math.cos(self.angle * math.pi / 180)
-                self.x += self.speed * math.sin(self.angle * math.pi / 180)
+                dy = self.speed * math.cos(self.angle * math.pi / 180)
+                dx = self.speed * math.sin(self.angle * math.pi / 180)
+                if dy < 0 and not self.canMoveUp: return
+                if dy > 0 and not self.canMoveDown: return
+                if dx < 0 and not self.canMoveLeft: return
+                if dx > 0 and not self.canMoveRight: return
+                self.y += dy
+                self.x += dx
             if state == TankState.UP:
-                self.y -= self.speed * math.cos(self.angle * math.pi / 180)
-                self.x -= self.speed * math.sin(self.angle * math.pi / 180)
+                dy = - self.speed * math.cos(self.angle * math.pi / 180)
+                dx = - self.speed * math.sin(self.angle * math.pi / 180)
+                if dy < 0 and not self.canMoveUp: return
+                if dy > 0 and not self.canMoveDown: return
+                if dx < 0 and not self.canMoveLeft: return
+                if dx > 0 and not self.canMoveRight: return
+                self.y += dy
+                self.x += dx
+        if dy > 0:
+            self.canMoveUp = True
+        if dy < 0:
+            self.canMoveDown = True
+        if dx < 0:
+            self.canMoveRight = True
+        if dx > 0:
+            self.canMoveLeft = True
 
     def onReleaseA(self):
         self.states.remove(TankState.ROTATE_LEFT)

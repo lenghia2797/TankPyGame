@@ -31,7 +31,7 @@ class GameScene(Scene):
 
         # self.background = GameObject(self, -200, -200, Constants.SCREEN_WIDTH * 4,
                                     #  Constants.SCREEN_HEIGHT * 4, self.game.loader.background_image, 0)
-        self.player_1_1 = Player(self, 960/2, 540/2, Constants.TANK_WIDTH,
+        self.player = Player(self, 960/2, 540/2, Constants.TANK_WIDTH,
                                  Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
         # self.player_1_1.ignoreCamera = True
         # self.player_1_1.triangle.ignoreCamera = True
@@ -62,7 +62,7 @@ class GameScene(Scene):
             bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
                             Constants.BULLET_HEIGHT, self.game.loader.bullet_red_image, 2)
             bullet.active = False
-            bullet.tank = self.player_1_1
+            bullet.tank = self.player
             bullet.color = 1
             self.add(bullet)
             self.redBullets.append(bullet)
@@ -80,16 +80,17 @@ class GameScene(Scene):
             self.blueBullets.append(bullet)
 
         # self.add(self.background)
-        self.add(self.player_1_1)
-        self.add(self.player_1_2)
-        self.add(self.player_1_1.triangle)
-        self.add(self.player_1_2.triangle)
-        self.add(self.wall)
+        self.add(self.player)
+        # self.add(self.player_1_2)
+        self.add(self.player.triangle)
+        # self.add(self.player_1_2.triangle)
+        # self.add(self.wall)
         if self.gameMode == 2:
-            self.add(self.player_2_1)
-            self.add(self.player_2_2)
-            self.add(self.player_2_1.triangle)
-            self.add(self.player_2_2.triangle)
+            pass
+            # self.add(self.player_2_1)
+            # self.add(self.player_2_2)
+            # self.add(self.player_2_1.triangle)
+            # self.add(self.player_2_2.triangle)
         else:
             self.add(self.enemy)
 
@@ -101,25 +102,56 @@ class GameScene(Scene):
     def update(self):
         self.screen.fill((243, 199, 79))
         self.updateCameraOffsetObject(
-            Constants.SCREEN_WIDTH/2 - self.player_1_1.x, 
-            Constants.SCREEN_HEIGHT/2 - self.player_1_1.y
+            Constants.SCREEN_WIDTH/2 - self.player.x, 
+            Constants.SCREEN_HEIGHT/2 - self.player.y
         )
         running = super().update()
         
-        self.checkCollisionBulletWall(self.redBullets)
-        self.checkCollisionBulletWall(self.blueBullets)
+        self.checkCollisionPlayerMap()
+        
+        # self.checkCollisionBulletWall(self.redBullets)
+        # self.checkCollisionBulletWall(self.blueBullets)
         if self.gameMode == 2:
             self.checkCollisionBulletTank(self.redBullets, self.player_2_1)
             self.checkCollisionBulletTank(self.redBullets, self.player_2_2)
         else:
             self.checkCollisionBulletTank(self.redBullets, self.enemy)
-        self.checkCollisionBulletTank(self.blueBullets, self.player_1_1)
+        self.checkCollisionBulletTank(self.blueBullets, self.player)
         self.checkCollisionBulletTank(self.blueBullets, self.player_1_2)
 
         self.scoreLabel.update()
         self.scoreLabel2.update()
 
         return running
+    
+    def checkCollisionPlayerMap(self):
+        for tile in self.map.tiles:
+            self.checkCollisionPlayerWall(tile)
+    
+    def checkCollisionPlayerWall(self, wall):
+        collision_tolerance = 5
+        if not wall.visible: return
+        wall_rect = pygame.Rect(wall.x, wall.y,
+                                        wall.width, wall.height)
+        player_rect = pygame.Rect(self.player.x, self.player.y,
+                                          self.player.width, self.player.height)
+        if player_rect.colliderect(wall_rect):
+            if abs(wall_rect.top - player_rect.bottom) < collision_tolerance :
+                # right
+                print('right')
+                self.player.canMoveRight = False
+            elif abs(wall_rect.bottom - player_rect.top) < collision_tolerance :
+                # top
+                print('top')
+                self.player.canMoveUp = False
+            elif abs(wall_rect.right - player_rect.left) < collision_tolerance :
+                # left
+                print('left')
+                self.player.canMoveLeft = False
+            elif abs(wall_rect.left - player_rect.right) < collision_tolerance :
+                # down
+                print('down')
+                self.player.canMoveDown = False
 
     def checkCollisionBulletWall(self, bullets):
         collision_tolerance = 10
@@ -159,9 +191,9 @@ class GameScene(Scene):
     def shootBullet(self):
         bullet = self.getRedDeadBullet()
         if bullet:
-            if self.player_1_1.type == TankType.PLAYER_1:
-                bullet.tank = self.player_1_1
-            elif self.player_1_1.type == TankType.AI_1:
+            if self.player.type == TankType.PLAYER_1:
+                bullet.tank = self.player
+            elif self.player.type == TankType.AI_1:
                 bullet.tank = self.player_1_2
 
             now = pygame.time.get_ticks()

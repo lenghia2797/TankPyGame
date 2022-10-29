@@ -33,7 +33,7 @@ class TileMap():
         for row in map:
             x = 0
             for tile in row:
-                if tile == '5':
+                if tile == '3':
                     tiles.append(Tile(self.scene, x * self.tile_size, y * self.tile_size, self.tile_size, self.tile_size, 
                                             self.scene.game.loader.wall_image, 3))
                     # Move to next tile in current row
