@@ -31,7 +31,7 @@ class GameScene(Scene):
 
         # self.background = GameObject(self, -200, -200, Constants.SCREEN_WIDTH * 4,
                                     #  Constants.SCREEN_HEIGHT * 4, self.game.loader.background_image, 0)
-        self.player = Player(self, 960/2, 540/2, Constants.TANK_WIDTH,
+        self.player = Player(self, 200, 200, Constants.TANK_WIDTH,
                                  Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
         # self.player_1_1.ignoreCamera = True
         # self.player_1_1.triangle.ignoreCamera = True
@@ -97,7 +97,7 @@ class GameScene(Scene):
         self.scoreLabel = ScoreLabel(self)
         self.scoreLabel2 = ScoreLabel2(self)
         
-        self.map = TileMap(self, 'assets/map.csv')
+        self.map = TileMap(self, 'assets/levelMap.csv')
 
     def update(self):
         self.screen.fill((243, 199, 79))
