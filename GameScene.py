@@ -109,15 +109,17 @@ class GameScene(Scene):
         
         self.checkCollisionPlayerMap()
         
+        self.checkCollisionBulletMap(self.redBullets)
+        
         # self.checkCollisionBulletWall(self.redBullets)
         # self.checkCollisionBulletWall(self.blueBullets)
-        if self.gameMode == 2:
-            self.checkCollisionBulletTank(self.redBullets, self.player_2_1)
-            self.checkCollisionBulletTank(self.redBullets, self.player_2_2)
-        else:
-            self.checkCollisionBulletTank(self.redBullets, self.enemy)
-        self.checkCollisionBulletTank(self.blueBullets, self.player)
-        self.checkCollisionBulletTank(self.blueBullets, self.player_1_2)
+        # if self.gameMode == 2:
+        #     self.checkCollisionBulletTank(self.redBullets, self.player_2_1)
+        #     self.checkCollisionBulletTank(self.redBullets, self.player_2_2)
+        # else:
+        #     self.checkCollisionBulletTank(self.redBullets, self.enemy)
+        # self.checkCollisionBulletTank(self.blueBullets, self.player)
+        # self.checkCollisionBulletTank(self.blueBullets, self.player_1_2)
 
         self.scoreLabel.update()
         self.scoreLabel2.update()
@@ -153,7 +155,25 @@ class GameScene(Scene):
                 print('down')
                 self.player.canMoveDown = False
 
-    def checkCollisionBulletWall(self, bullets):
+    def checkCollisionBulletMap(self, bullets):
+        for tile in self.map.tiles:
+            for bullet in bullets:
+                self.checkCollisionBulletWall(bullet, tile)
+       
+    def checkCollisionBulletWall(self, bullet, wall):
+        collision_tolerance = 10
+        if not bullet.visible: return
+        if not wall.visible: return
+        bullet_rect = pygame.Rect(bullet.x, bullet.y,
+                                    bullet.width, bullet.height)
+        wall_rect = pygame.Rect(wall.x, wall.y,
+                                wall.width, wall.height)
+        if bullet_rect.colliderect(wall_rect):
+            bullet.active = False
+            bullet.visible = False
+            print(random.random())
+            
+    def checkCollisionBulletWall2(self, bullets):
         collision_tolerance = 10
         for bullet in bullets:
             if bullet.visible:
@@ -218,6 +238,7 @@ class GameScene(Scene):
     def shoot(self, bullet):
         bullet.active = True
         bullet.visible = True
+        
         bullet.collide = 0
 
         bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
