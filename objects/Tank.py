@@ -15,8 +15,6 @@ class Tank(GameObject):
         self.speed = 2
         self.angle = 0
         self.image = pygame.transform.rotate(self.image, self.angle)
-        
-        print('>>>', image)
 
         self.lastTimeShoot = pygame.time.get_ticks()
         self.timeShoot = 1000

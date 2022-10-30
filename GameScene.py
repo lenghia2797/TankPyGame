@@ -24,26 +24,12 @@ class GameScene(Scene):
     def __init__(self, screen, game: Game, sceneManager: SceneManager):
         super().__init__(screen, game, sceneManager)
         self.name = Constants.GAME_SCENE
-        # self.gameMode = 2
 
         self.bullets = []
-        # self.redBullets = []
-        # self.blueBullets = []
-
-        # self.background = GameObject(self, -200, -200, Constants.SCREEN_WIDTH * 4,
-                                    #  Constants.SCREEN_HEIGHT * 4, self.game.loader.background_image, 0)
         self.player = Player(self, 200, 200, Constants.TANK_WIDTH,
                                  Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
         
         self.bullets += self.player.bullets
-        print('>>>', len(self.bullets))
-        # self.player_1_1.ignoreCamera = True
-        # self.player_1_1.triangle.ignoreCamera = True
-        # self.player_1_2 = Player(self, 100, 300, Constants.TANK_WIDTH,
-        #                          Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
-        # self.player_1_2.type = TankType.AI_1
-        # self.player_1_2.triangle.visible = False
-
         # if self.gameMode == 2:
         #     pass
         #     self.player_2_1 = Player2(self, 800, 100, Constants.TANK_WIDTH,
@@ -63,41 +49,10 @@ class GameScene(Scene):
 
         self.wall = Wall(self, 400, 400, Constants.WALL_WIDTH,
                          Constants.WALL_HEIGHT, self.game.loader.wall_image, 3)
-        # for i in range(10):
-        #     bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
-        #                     Constants.BULLET_HEIGHT, self.game.loader.bullet_red_image, 2)
-        #     bullet.active = False
-        #     bullet.tank = self.player
-        #     bullet.color = 1
-        #     self.add(bullet)
-        #     self.redBullets.append(bullet)
 
-        # for i in range(10):
-        #     bullet = Bullet(self, -100, -100, Constants.BULLET_WIDTH,
-        #                     Constants.BULLET_HEIGHT, self.game.loader.bullet_blue_image, 2)
-        #     bullet.active = False
-        #     bullet.color = 2
-        #     if self.gameMode == 2:
-        #         bullet.tank = self.player_2_1
-        #     else:
-        #         bullet.tank = self.enemy
-        #     self.add(bullet)
-        #     self.blueBullets.append(bullet)
 
-        # self.add(self.background)
         self.add(self.player)
-        # self.add(self.player_1_2)
         self.add(self.player.triangle)
-        # self.add(self.player_1_2.triangle)
-        # self.add(self.wall)
-        # if self.gameMode == 2:
-        #     pass
-        #     self.add(self.player_2_1)
-        #     self.add(self.player_2_2)
-        #     self.add(self.player_2_1.triangle)
-        #     self.add(self.player_2_2.triangle)
-        # else:
-        #     self.add(self.enemy)
 
         self.scoreLabel = ScoreLabel(self)
         self.scoreLabel2 = ScoreLabel2(self)
@@ -210,55 +165,3 @@ class GameScene(Scene):
     #                     ScoreLabel.score += 1
     #                 if bullet.color == 2 and (tank.type == TankType.PLAYER_1 or tank.type == TankType.AI_1):
     #                     ScoreLabel2.score += 1
-
-    # def shootBullet(self):
-    #     bullet = self.getRedDeadBullet()
-    #     if bullet:
-    #         if self.player.type == TankType.PLAYER_1:
-    #             bullet.tank = self.player
-    #         elif self.player.type == TankType.AI_1:
-    #             bullet.tank = self.player_1_2
-
-    #         now = pygame.time.get_ticks()
-    #         if now - bullet.tank.lastTimeShoot > bullet.tank.timeShoot:
-    #             bullet.tank.lastTimeShoot = now
-    #             self.shoot(bullet)
-
-    # def shootBullet2(self):
-    #     bullet = self.getBlueDeadBullet()
-    #     if bullet:
-    #         if self.gameMode == 2:
-    #             if self.player_2_1.type == TankType.PLAYER_2:
-    #                 bullet.tank = self.player_2_1
-    #             elif self.player_2_1.type == TankType.AI_2:
-    #                 bullet.tank = self.player_2_2
-
-    #         now = pygame.time.get_ticks()
-    #         if now - bullet.tank.lastTimeShoot > bullet.tank.timeShoot:
-    #             bullet.tank.lastTimeShoot = now
-    #             self.shoot(bullet)
-
-    # def shoot(self, bullet):
-    #     bullet.active = True
-    #     bullet.visible = True
-        
-    #     bullet.collide = 0
-
-    #     bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
-    #     bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
-    #     bullet.vx = bullet.speed * \
-    #         math.sin((bullet.tank.angle - 180) * math.pi / 180)
-    #     bullet.vy = bullet.speed * \
-    #         math.cos((bullet.tank.angle - 180) * math.pi / 180)
-
-    # def getRedDeadBullet(self):
-    #     for bullet in self.redBullets:
-    #         if not bullet.active:
-    #             return bullet
-    #     return None
-
-    # def getBlueDeadBullet(self):
-    #     for bullet in self.blueBullets:
-    #         if not bullet.active:
-    #             return bullet
-    #     return None
