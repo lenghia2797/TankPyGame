@@ -18,7 +18,7 @@ class Player2(Tank):
         self.setKey('down_right', self.onPressRight)
         self.setKey('down_down', self.onPressDown)
         self.setKey('down_up', self.onPressUp)
-        self.setKey('down_enter', self.scene.shootBullet2)
+        # self.setKey('down_enter', self.scene.shootBullet2)
         self.setKey('down_o', self.switchPlayer)
         self.setKey('up_left', self.onReleaseLeft)
         self.setKey('up_right', self.onReleaseRight)

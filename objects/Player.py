@@ -12,17 +12,16 @@ from objects.Tank import Tank
 
 class Player(Tank):
     def __init__(self, scene, x, y, width, height, image, depth):
-        super().__init__(scene, x, y, width, height, image, depth)
+        super().__init__(scene, x, y, width, height, image, depth, TankType.PLAYER_1)
         self.canMoveLeft = True
         self.canMoveRight = True
         self.canMoveUp = True
         self.canMoveDown = True
-        self.type = TankType.PLAYER_1
         self.setKey('down_a', self.onPressA)
         self.setKey('down_d', self.onPressD)
         self.setKey('down_w', self.onPressW)
         self.setKey('down_s', self.onPressS)
-        self.setKey('down_x', self.scene.shootBullet)
+        self.setKey('down_x', self.shootBullet)
         self.setKey('down_q', self.switchPlayer)
         self.setKey('up_a', self.onReleaseA)
         self.setKey('up_d', self.onReleaseD)

@@ -1,22 +1,24 @@
 import pygame, csv, os
 
 from gamecore.GameObject import GameObject
-
-class Tile(GameObject):
-    def __init__(self, scene, image, x, y, width, height, depth):
-        super().__init__(scene, image, x, y, width, height, depth)
+from objects.Enemy import Enemy
+from objects.Wall import Wall
 
 class TileMap():
     def __init__(self, scene, filename):
         self.scene = scene
         self.tile_size = 80
         self.start_x, self.start_y = 0, 0
-        self.tiles = self.load_tiles(filename)
+        self.tiles = []
+        self.enemies = []
+        self.load_tiles(filename)
         self.addToScene()
         
     def addToScene(self):
         for tile in self.tiles:
             self.scene.add(tile)
+        for enemy in self.enemies:
+            self.scene.add(enemy)
 
     def read_csv(self, filename):
         map = []
@@ -27,15 +29,21 @@ class TileMap():
         return map
 
     def load_tiles(self, filename):
-        tiles = []
         map = self.read_csv(filename)
         x, y = 0, 0
+        loader = self.scene.game.loader
         for row in map:
             x = 0
             for tile in row:
+                pos_x = x * self.tile_size
+                pos_y = y * self.tile_size
+                size = self.tile_size
+                if tile == '0':
+                    self.enemies.append(Enemy(self.scene, pos_x, pos_y, size, size, 
+                                            loader.tank_blue_image, 3))
                 if tile == '3':
-                    tiles.append(Tile(self.scene, x * self.tile_size, y * self.tile_size, self.tile_size, self.tile_size, 
-                                            self.scene.game.loader.wall_image, 3))
+                    self.tiles.append(Wall(self.scene, pos_x, pos_y, size, size, 
+                                            loader.wall_image, 3))
                     # Move to next tile in current row
                 x += 1
 
@@ -43,7 +51,6 @@ class TileMap():
             y += 1
             # Store the size of the tile map
         self.map_w, self.map_h = x * self.tile_size, y * self.tile_size
-        return tiles
 
 
 

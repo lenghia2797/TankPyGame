@@ -13,22 +13,20 @@ from objects.Tank import Tank
 
 class Enemy(Tank):
     def __init__(self, scene, x, y, width, height, image, depth):
-        super().__init__(scene, x, y, width, height, image, depth)
+        super().__init__(scene, x, y, width, height, image, depth, TankType.ENEMY_1)
         self.speedY = 2
         self.rawY = y
         self.rawX = x
         self.moveDown = True
         self.moveLeft = True
-
-        self.timeShoot = 500
-        self.lastTimeRotate = pygame.time.get_ticks()
+        
         self.timeRotate = 1500
 
     def update(self):
         super().update()
-        self.autoMove()
-        self.updateShoot()
-        self.updateByState()
+        # self.autoMove()
+        self.shootBullet()
+        # self.updateByState()
 
     def updateShoot(self):
         now = pygame.time.get_ticks()
@@ -82,16 +80,16 @@ class Enemy(Tank):
             self.lastTimeRotate = now
             self.states.append(TankState.ROTATE_LEFT)
 
-    def shootBullet(self):
-        bullet = self.scene.getBlueDeadBullet()
-        if bullet:
-            bullet.active = True
-            bullet.visible = True
-            bullet.collide = 0
-            bullet.tank = self
-            bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
-            bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
-            bullet.vx = bullet.speed * \
-                math.sin((bullet.tank.angle - 180) * math.pi / 180)
-            bullet.vy = bullet.speed * \
-                math.cos((bullet.tank.angle - 180) * math.pi / 180)
+    # def shootBullet(self):
+    #     bullet = self.scene.getBlueDeadBullet()
+    #     if bullet:
+    #         bullet.active = True
+    #         bullet.visible = True
+    #         bullet.collide = 0
+    #         bullet.tank = self
+    #         bullet.x = bullet.tank.x + Constants.TANK_WIDTH/2
+    #         bullet.y = bullet.tank.y + Constants.TANK_HEIGHT/2
+    #         bullet.vx = bullet.speed * \
+    #             math.sin((bullet.tank.angle - 180) * math.pi / 180)
+    #         bullet.vy = bullet.speed * \
+    #             math.cos((bullet.tank.angle - 180) * math.pi / 180)
