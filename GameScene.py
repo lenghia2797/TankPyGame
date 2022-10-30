@@ -33,20 +33,22 @@ class GameScene(Scene):
                                     #  Constants.SCREEN_HEIGHT * 4, self.game.loader.background_image, 0)
         self.player = Player(self, 200, 200, Constants.TANK_WIDTH,
                                  Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
+        
         # self.player_1_1.ignoreCamera = True
         # self.player_1_1.triangle.ignoreCamera = True
-        self.player_1_2 = Player(self, 100, 300, Constants.TANK_WIDTH,
-                                 Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
-        self.player_1_2.type = TankType.AI_1
-        self.player_1_2.triangle.visible = False
+        # self.player_1_2 = Player(self, 100, 300, Constants.TANK_WIDTH,
+        #                          Constants.TANK_HEIGHT, self.game.loader.tank_red_image, 3)
+        # self.player_1_2.type = TankType.AI_1
+        # self.player_1_2.triangle.visible = False
 
         if self.gameMode == 2:
-            self.player_2_1 = Player2(self, 800, 100, Constants.TANK_WIDTH,
-                                      Constants.TANK_HEIGHT, self.game.loader.tank_blue_image, 3)
-            self.player_2_2 = Player2(self, 800, 300, Constants.TANK_WIDTH,
-                                      Constants.TANK_HEIGHT, self.game.loader.tank_blue_image, 3)
-            self.player_2_2.type = TankType.AI_2
-            self.player_2_2.triangle.visible = False
+            pass
+            # self.player_2_1 = Player2(self, 800, 100, Constants.TANK_WIDTH,
+            #                           Constants.TANK_HEIGHT, self.game.loader.tank_blue_image, 3)
+            # self.player_2_2 = Player2(self, 800, 300, Constants.TANK_WIDTH,
+            #                           Constants.TANK_HEIGHT, self.game.loader.tank_blue_image, 3)
+            # self.player_2_2.type = TankType.AI_2
+            # self.player_2_2.triangle.visible = False
         else:
 
             self.enemy = Enemy(self, 700, 100, Constants.TANK_WIDTH, Constants.TANK_HEIGHT,
@@ -171,7 +173,6 @@ class GameScene(Scene):
         if bullet_rect.colliderect(wall_rect):
             bullet.active = False
             bullet.visible = False
-            print(random.random())
             
     def checkCollisionBulletWall2(self, bullets):
         collision_tolerance = 10
