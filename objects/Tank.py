@@ -55,8 +55,12 @@ class Tank(GameObject):
             self.shoot(bullet)
             
     def shoot(self, bullet):
+        if self.type == TankType.PLAYER_1:
+            self.scene.play_sound(self.scene.shoot_sound)
+        
         bullet.active = True
         bullet.visible = True
+        
         
         # bullet.collide = 0
 

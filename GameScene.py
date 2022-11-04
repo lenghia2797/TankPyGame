@@ -16,6 +16,8 @@ from objects.TileMap import TileMap
 from objects.Wall import Wall
 from gamecore.SceneManager import SceneManager
 
+from pygame import mixer
+
 def onClickPlayer():
     print(random.random())
 
@@ -24,6 +26,13 @@ class GameScene(Scene):
     def __init__(self, screen, game: Game, sceneManager: SceneManager):
         super().__init__(screen, game, sceneManager)
         self.name = Constants.GAME_SCENE
+        
+        mixer.init()
+        mixer.music.set_volume(0.1)
+
+        # mixer.music.load('assets/sounds/music_background.mp3')
+        # mixer.music.play(-1)
+        self.load_sound()
 
         self.bullets = []
         self.player = Player(self, 200, 200, Constants.TANK_WIDTH,
@@ -61,7 +70,17 @@ class GameScene(Scene):
         
         for enemy in self.map.enemies:
             self.bullets += enemy.bullets
-
+            
+    def load_sound(self):
+        self.shoot_sound = mixer.Sound('assets/sounds/sound_shoot.mp3')
+        self.bullet_hit_sound = mixer.Sound('assets/sounds/sound_bullet_hit.mp3')
+        self.score_sound = mixer.Sound('assets/sounds/sound_score.mp3')
+        # self.power_up_sound = mixer.Sound('assets/sounds/sound_power_up.mp3')
+        self.fail_sound = mixer.Sound('assets/sounds/sound_fail.mp3')
+            
+    def play_sound(self, sound):
+        mixer.Sound.play(sound)
+        
     def update(self):
         self.screen.fill((243, 199, 79))
         self.updateCameraOffsetObject(
@@ -92,6 +111,9 @@ class GameScene(Scene):
     def checkCollisionPlayerMap(self):
         for tile in self.map.tiles:
             self.checkCollisionPlayerWall(tile)
+        
+        for coin in self.map.coins:
+            self.checkCollisionPlayerCoin(coin)
     
     def checkCollisionPlayerWall(self, wall):
         collision_tolerance = 5
@@ -118,6 +140,11 @@ class GameScene(Scene):
         for tile in self.map.tiles:
             for bullet in self.bullets:
                 self.checkCollisionBulletWall(bullet, tile)
+                
+        for enemy in self.map.enemies:
+            for bullet in self.bullets:   
+                if bullet.type == TankType.PLAYER_1:
+                    self.checkCollisionBulletEnemy(bullet, enemy)
        
     def checkCollisionBulletWall(self, bullet, wall):
         collision_tolerance = 10
@@ -130,6 +157,39 @@ class GameScene(Scene):
         if bullet_rect.colliderect(wall_rect):
             bullet.active = False
             bullet.visible = False
+            if bullet.type == TankType.PLAYER_1:
+                self.play_sound(self.bullet_hit_sound)
+            
+    def checkCollisionBulletEnemy(self, bullet, enemy):
+        collision_tolerance = 10
+        if not bullet.visible: return
+        if not enemy.visible: return
+        bullet_rect = pygame.Rect(bullet.x, bullet.y,
+                                    bullet.width, bullet.height)
+        enemy_rect = pygame.Rect(enemy.x, enemy.y,
+                                enemy.width, enemy.height)
+        if bullet_rect.colliderect(enemy_rect):
+            bullet.active = False
+            bullet.visible = False
+            enemy.active = False
+            enemy.visible = False
+            self.play_sound(self.score_sound)
+            ScoreLabel.score += 1
+            
+    def checkCollisionPlayerCoin(self, coin):
+        collision_tolerance = 10
+        player = self.player
+        if not player.visible: return
+        if not coin.visible: return
+        coin_rect = pygame.Rect(player.x, player.y,
+                                    player.width, player.height)
+        enemy_rect = pygame.Rect(coin.x, coin.y,
+                                coin.width, coin.height)
+        if coin_rect.colliderect(enemy_rect):
+            coin.active = False
+            coin.visible = False
+            self.play_sound(self.score_sound)
+            ScoreLabel.score += 1
             
     # def checkCollisionBulletWall2(self, bullets):
     #     collision_tolerance = 10

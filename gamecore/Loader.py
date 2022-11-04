@@ -35,3 +35,5 @@ class Loader:
         self.new_game_image = pygame.image.load(r'./assets/images/img_new_game.png')
         self.start_image = pygame.image.load(r'./assets/images/img_start.png')
         
+        
+        self.coin_image = pygame.image.load(r'./assets/images/coin.png')

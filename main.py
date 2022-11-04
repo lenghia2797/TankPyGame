@@ -24,10 +24,7 @@ screen = pygame.display.set_mode(
 pygame.display.set_caption('Tank')
 
 
-# mixer.init()
-# mixer.music.set_volume(0.1)
 
-# mixer.music.load('assets/sounds/bgm.mp3')
 
 
 # class PlayButton:

@@ -1,6 +1,7 @@
 import pygame, csv, os
 
 from gamecore.GameObject import GameObject
+from objects.Coin import Coin
 from objects.Enemy import Enemy
 from objects.Wall import Wall
 
@@ -11,6 +12,7 @@ class TileMap():
         self.start_x, self.start_y = 0, 0
         self.tiles = []
         self.enemies = []
+        self.coins = []
         self.load_tiles(filename)
         self.addToScene()
         
@@ -19,6 +21,8 @@ class TileMap():
             self.scene.add(tile)
         for enemy in self.enemies:
             self.scene.add(enemy)
+        for coin in self.coins:
+            self.scene.add(coin)
 
     def read_csv(self, filename):
         map = []
@@ -44,6 +48,10 @@ class TileMap():
                 if tile == '3':
                     self.tiles.append(Wall(self.scene, pos_x, pos_y, size, size, 
                                             loader.wall_image, 3))
+                    
+                if tile == '5':
+                    self.coins.append(Coin(self.scene, pos_x, pos_y, size, size, 
+                                            loader.coin_image, 3))
                     # Move to next tile in current row
                 x += 1
 
