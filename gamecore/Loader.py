@@ -40,3 +40,5 @@ class Loader:
         self.wrench_blue_image = pygame.image.load(r'./assets/images/img_wrench_blue.png')
         self.wrench_red_image = pygame.image.load(r'./assets/images/img_wrench_red.png')
         self.wrench_yellow_image = pygame.image.load(r'./assets/images/img_wrench_yellow.png')
+        
+        self.health_bar = pygame.image.load(r'./assets/images/health_bar.png')

@@ -21,17 +21,28 @@ class GameObject:
         self.ignoreCamera = False
         self.cameraOffsetX = 0
         self.cameraOffsetY = 0
+        self.cropX = 0
+        self.cropY = 0
 
     def update(self):
         pass
 
     def render(self):
-        if self.ignoreCamera:
-            self.scene.screen.blit(
-            self.image, (self.x, self.y, self.width, self.height))
+        if self.cropX == 0 or self.cropY == 0:
+            if self.ignoreCamera:
+                self.scene.screen.blit(
+                self.image, (self.x, self.y, self.width, self.height))
+            else:
+                self.scene.screen.blit(
+                self.image, (self.x + self.cameraOffsetX, self.y + self.cameraOffsetY, self.width, self.height))
         else:
-            self.scene.screen.blit(
-            self.image, (self.x + self.cameraOffsetX, self.y + self.cameraOffsetY, self.width, self.height))
+            if self.ignoreCamera:
+                self.scene.screen.blit(
+                self.image, (self.x, self.y, self.width, self.height), (0,0,self.cropX, self.cropY))
+            else:
+                self.scene.screen.blit(
+                self.image, (self.x + self.cameraOffsetX, self.y + self.cameraOffsetY, self.width, self.height),
+                (0,0,self.cropX, self.cropY))
 
     def setOnClick(self, onClickFunc):
         self.interactive = True

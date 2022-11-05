@@ -168,8 +168,7 @@ class GameScene(Scene):
             bullet.visible = False
             enemy.health -= bullet.tank.damage
             if enemy.health <= 0:
-                enemy.active = False
-                enemy.visible = False
+                enemy.dead()
                 self.play_sound(self.score_sound)
                 ScoreLabel.score += 1
                 
@@ -217,6 +216,8 @@ class GameScene(Scene):
         if coin_rect.colliderect(item_rect):
             item.active = False
             item.visible = False
+            self.player.damage += 10
+            self.player.health += 10
             
     # def checkCollisionBulletWall2(self, bullets):
     #     collision_tolerance = 10

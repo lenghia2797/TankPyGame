@@ -15,9 +15,12 @@ class Tank(GameObject):
         self.speed = 2
         self.angle = 0
         self.health = 100
-        self.damage = 100
+        self.damage = 20
         
         self.image = pygame.transform.rotate(self.image, self.angle)
+        self.heathBar = GameObject(self.scene, 0, 0, 80, 18, self.scene.game.loader.health_bar, 4)
+        
+        self.scene.add(self.heathBar)
 
         self.lastTimeShoot = pygame.time.get_ticks()
         self.timeShoot = 1000
@@ -28,6 +31,17 @@ class Tank(GameObject):
 
     def update(self):
         super().update()
+        if self.active:
+            self.heathBar.x = self.x
+            self.heathBar.y = self.y + Constants.TANK_HEIGHT + 2
+            self.heathBar.cropX = 82 * self.health / 100
+            self.heathBar.cropY = 82
+            
+    def dead(self):
+        self.active = False
+        self.visible = False
+        self.heathBar.active = False
+        self.heathBar.visible = False
 
     def setAngle(self, angle):
         self.angle = angle
