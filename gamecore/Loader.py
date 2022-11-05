@@ -37,3 +37,6 @@ class Loader:
         
         
         self.coin_image = pygame.image.load(r'./assets/images/coin.png')
+        self.wrench_blue_image = pygame.image.load(r'./assets/images/img_wrench_blue.png')
+        self.wrench_red_image = pygame.image.load(r'./assets/images/img_wrench_red.png')
+        self.wrench_yellow_image = pygame.image.load(r'./assets/images/img_wrench_yellow.png')

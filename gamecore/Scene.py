@@ -14,6 +14,12 @@ class Scene:
         self.inputHandler: InputHandler = InputHandler(self)
 
         self.objects: GameObject[100] = []
+        
+    def killAllObjects(self):
+        self.objects = []
+        
+    def run(self):
+        self.killAllObjects()
 
     def add(self, object: GameObject):
         self.objects.append(object)

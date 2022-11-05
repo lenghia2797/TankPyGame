@@ -20,13 +20,15 @@ class Enemy(Tank):
         self.moveDown = True
         self.moveLeft = True
         
+        self.lastTimeRotate = 0
+        
         self.timeRotate = 1500
 
     def update(self):
         super().update()
-        # self.autoMove()
+        self.autoMove()
         self.shootBullet()
-        # self.updateByState()
+        self.updateByState()
 
     def updateShoot(self):
         now = pygame.time.get_ticks()
@@ -54,7 +56,7 @@ class Enemy(Tank):
     def autoMove(self):
         if self.moveDown:
             self.y += self.speed
-            if self.y > self.rawY + 250:
+            if self.y > self.rawY + 50:
                 self.moveDown = False
         else:
             self.y -= self.speed
@@ -62,7 +64,7 @@ class Enemy(Tank):
                 self.moveDown = True
         if self.moveLeft:
             self.x += self.speed
-            if self.x > self.rawX + 150:
+            if self.x > self.rawX + 50:
                 self.moveLeft = False
         else:
             self.x -= self.speed

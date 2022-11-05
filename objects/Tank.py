@@ -14,6 +14,9 @@ class Tank(GameObject):
 
         self.speed = 2
         self.angle = 0
+        self.health = 100
+        self.damage = 100
+        
         self.image = pygame.transform.rotate(self.image, self.angle)
 
         self.lastTimeShoot = pygame.time.get_ticks()

@@ -8,6 +8,7 @@ class SceneManager:
     
     def changeSceneTo(self, name):
         SceneManager.CurrentSceneName = name
+        self.getCurrentScene().run()
         
     def getCurrentScene(self):
         for scene in self.sceneList:

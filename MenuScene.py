@@ -12,6 +12,12 @@ class MenuScene(Scene):
         super().__init__(screen, game, sceneManager)
         self.name = Constants.MENU_SCENE
         
+        self.run()
+        
+        
+    def run(self):
+        super().run()
+        
         self.background = GameObject(self, 0, 0, Constants.SCREEN_WIDTH,
                                      Constants.SCREEN_HEIGHT, self.game.loader.background_image, 0)
         
@@ -23,6 +29,7 @@ class MenuScene(Scene):
         self.playBtn.y = Constants.SCREEN_HEIGHT/2 - self.playBtn.height/2
         self.playBtn.setOnClick(self.onPlayButton)
         self.add(self.playBtn)
+        
         
     def onPlayButton(self):
         print(1234)
