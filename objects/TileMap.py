@@ -58,9 +58,24 @@ class TileMap():
                     self.tiles.append(Wall(self.scene, pos_x, pos_y, size, size, 
                                             loader.wall_image, 3))
                     
+                if tile == '4':
+                    enemy = Enemy(self.scene, pos_x, pos_y, size, size, 
+                                            loader.tank_yellow_image, 3)
+                    enemy.name = 'boss'
+                    enemy.damage = 100
+                    self.enemies.append(enemy)
+                    
                 if tile == '5':
-                    self.coins.append(Coin(self.scene, pos_x, pos_y, size, size, 
-                                            loader.coin_image, 3))
+                    coin = Coin(self.scene, pos_x, pos_y, size, size, 
+                                            loader.coin_image, 3)
+                    coin.setScale(0.3, 0.3)
+                    self.coins.append(coin)
+                    
+                if tile == '7':
+                    coin = Coin(self.scene, pos_x, pos_y, 25, 25, 
+                                            loader.star, 3)
+                    coin.name = 'star'
+                    self.coins.append(coin)
                     # Move to next tile in current row
                 x += 1
 

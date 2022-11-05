@@ -32,5 +32,4 @@ class MenuScene(Scene):
         
         
     def onPlayButton(self):
-        print(1234)
         self.sceneManager.changeSceneTo(Constants.GAME_SCENE)

@@ -34,7 +34,7 @@ class Loader:
         
         self.new_game_image = pygame.image.load(r'./assets/images/img_new_game.png')
         self.start_image = pygame.image.load(r'./assets/images/img_start.png')
-        
+        self.pause_image = pygame.image.load(r'./assets/images/img_pause.png')
         
         self.coin_image = pygame.image.load(r'./assets/images/coin.png')
         self.wrench_blue_image = pygame.image.load(r'./assets/images/img_wrench_blue.png')
@@ -42,3 +42,4 @@ class Loader:
         self.wrench_yellow_image = pygame.image.load(r'./assets/images/img_wrench_yellow.png')
         
         self.health_bar = pygame.image.load(r'./assets/images/health_bar.png')
+        self.star = pygame.image.load(r'./assets/images/star.png')

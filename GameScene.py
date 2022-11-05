@@ -30,8 +30,8 @@ class GameScene(Scene):
         mixer.init()
         mixer.music.set_volume(0.1)
 
-        # mixer.music.load('assets/sounds/music_background.mp3')
-        # mixer.music.play(-1)
+        mixer.music.load('assets/sounds/music_background.mp3')
+        mixer.music.play(-1)
         self.load_sound()
 
         self.run()
@@ -52,18 +52,27 @@ class GameScene(Scene):
         self.add(self.player.triangle)
 
         self.scoreLabel = ScoreLabel(self)
-        self.scoreLabel2 = ScoreLabel2(self)
+        # self.scoreLabel2 = ScoreLabel2(self)
         
         self.map = TileMap(self, 'assets/levelMap.csv')
         
         for enemy in self.map.enemies:
             self.bullets += enemy.bullets
+            
+        self.homeBtn = GameObject(self, 10, 10, 112, 113, self.game.loader.pause_image, 5)
+        self.homeBtn.ignoreCamera = True
+        self.homeBtn.setScale(0.5, 0.5)
+        self.homeBtn.setOnClick(self.onHomeButton)
+        self.add(self.homeBtn)
+        
+        
+    def onHomeButton(self):
+        self.sceneManager.changeSceneTo(Constants.MENU_SCENE)
     
     def load_sound(self):
         self.shoot_sound = mixer.Sound('assets/sounds/sound_shoot.mp3')
         self.bullet_hit_sound = mixer.Sound('assets/sounds/sound_bullet_hit.mp3')
         self.score_sound = mixer.Sound('assets/sounds/sound_score.mp3')
-        # self.power_up_sound = mixer.Sound('assets/sounds/sound_power_up.mp3')
         self.fail_sound = mixer.Sound('assets/sounds/sound_fail.mp3')
             
     def play_sound(self, sound):
@@ -80,19 +89,9 @@ class GameScene(Scene):
         self.checkCollisionPlayerMap()
         
         self.checkCollisionBulletMap()
-        
-        # self.checkCollisionBulletWall(self.redBullets)
-        # self.checkCollisionBulletWall(self.blueBullets)
-        # if self.gameMode == 2:
-        #     self.checkCollisionBulletTank(self.redBullets, self.player_2_1)
-        #     self.checkCollisionBulletTank(self.redBullets, self.player_2_2)
-        # else:
-        #     self.checkCollisionBulletTank(self.redBullets, self.enemy)
-        # self.checkCollisionBulletTank(self.blueBullets, self.player)
-        # self.checkCollisionBulletTank(self.blueBullets, self.player_1_2)
 
         self.scoreLabel.update()
-        self.scoreLabel2.update()
+        # self.scoreLabel2.update()
 
         return running
     
@@ -167,6 +166,7 @@ class GameScene(Scene):
             bullet.active = False
             bullet.visible = False
             enemy.health -= bullet.tank.damage
+            self.play_sound(self.bullet_hit_sound)
             if enemy.health <= 0:
                 enemy.dead()
                 self.play_sound(self.score_sound)
@@ -203,6 +203,9 @@ class GameScene(Scene):
             coin.visible = False
             self.play_sound(self.score_sound)
             ScoreLabel.score += 1
+            if coin.name == 'star':
+                self.player.health = 100
+                self.player.damage = 100
             
     def checkCollisionPlayerItem(self, item):
         collision_tolerance = 10
@@ -216,8 +219,9 @@ class GameScene(Scene):
         if coin_rect.colliderect(item_rect):
             item.active = False
             item.visible = False
-            self.player.damage += 10
-            self.player.health += 10
+            self.player.damage += 20
+            self.player.health += 20
+            self.play_sound(self.score_sound)
             
     # def checkCollisionBulletWall2(self, bullets):
     #     collision_tolerance = 10

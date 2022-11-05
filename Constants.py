@@ -13,7 +13,7 @@ class Constants:
     COLOR2 = (235, 158, 52)
     COLOR3 = (232, 58, 28)
 
-    SCORE_LABEL_X = 60
+    SCORE_LABEL_X = 160
     SCORE_LABEL_Y = 30
     PADDING_LABEL = 75
     COLOR_TEXT = (0, 0, 0)

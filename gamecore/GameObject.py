@@ -23,6 +23,7 @@ class GameObject:
         self.cameraOffsetY = 0
         self.cropX = 0
         self.cropY = 0
+        self.name = ''
 
     def update(self):
         pass

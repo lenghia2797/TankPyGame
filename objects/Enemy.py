@@ -19,6 +19,7 @@ class Enemy(Tank):
         self.rawX = x
         self.moveDown = True
         self.moveLeft = True
+        self.speed = 1.2 + 0.4 * random.random()
         
         self.lastTimeRotate = 0
         
@@ -40,12 +41,20 @@ class Enemy(Tank):
         for state in self.states:
             if state == TankState.ROTATE_LEFT:
                 self.setAngle(self.angle + 1)
-                self.image = self.rot_center(self.scene.game.loader.tank_blue_image,
-                                             self.angle)
+                if self.name == 'boss':
+                    self.image = self.rot_center(self.scene.game.loader.tank_yellow_image,
+                                                self.angle)
+                else:
+                    self.image = self.rot_center(self.scene.game.loader.tank_blue_image,
+                                                self.angle)
             if state == TankState.ROTATE_RIGHT:
                 self.setAngle(self.angle - 1)
-                self.image = self.rot_center(self.scene.game.loader.tank_blue_image,
-                                             self.angle)
+                if self.name == 'boss':
+                    self.image = self.rot_center(self.scene.game.loader.tank_yellow_image,
+                                                self.angle)
+                else:
+                    self.image = self.rot_center(self.scene.game.loader.tank_blue_image,
+                                                self.angle)
             if state == TankState.UP:
                 self.y += self.speed * math.cos(self.angle * math.pi / 180)
                 self.x += self.speed * math.sin(self.angle * math.pi / 180)
